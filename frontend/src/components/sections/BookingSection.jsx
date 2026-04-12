@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '../ui/card';
 import { CheckCircle2 } from 'lucide-react';
@@ -8,6 +8,8 @@ const BookingSection = () => {
   const { booking } = mockData;
   const navigate = useNavigate();
   const [selectedPackage, setSelectedPackage] = useState(null);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const calendlyRef = useRef(null);
 
   const packages = [
     {
@@ -27,27 +29,70 @@ const BookingSection = () => {
     }
   ];
 
+  // Load Calendly script once on mount
   useEffect(() => {
-    // Load Calendly script if not already loaded
-    if (!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+    const loadCalendlyScript = () => {
+      // Check if script already exists
+      if (window.Calendly) {
+        setScriptLoaded(true);
+        return;
+      }
+
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      script.onload = () => {
+        setScriptLoaded(true);
+        console.log('✅ Calendly script loaded');
+      };
+      script.onerror = () => {
+        console.error('❌ Failed to load Calendly script');
+      };
       document.head.appendChild(script);
-    }
+
+      // Also load CSS
+      const link = document.createElement('link');
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    };
+
+    loadCalendlyScript();
   }, []);
 
+  // Initialize Calendly widget when package is selected and script is loaded
+  useEffect(() => {
+    if (selectedPackage && scriptLoaded && window.Calendly && calendlyRef.current) {
+      console.log('🔄 Initializing Calendly widget...');
+      
+      // Clear any existing content
+      calendlyRef.current.innerHTML = '';
+      
+      // Initialize Calendly widget
+      window.Calendly.initInlineWidget({
+        url: booking.calendlyUrl,
+        parentElement: calendlyRef.current,
+        prefill: {},
+        utm: {}
+      });
+      
+      console.log('✅ Calendly widget initialized');
+    }
+  }, [selectedPackage, scriptLoaded, booking.calendlyUrl]);
+
   const handlePackageSelect = (packageId) => {
+    console.log('📦 Package selected:', packageId);
     setSelectedPackage(packageId);
+    
     // Scroll to Calendly section after brief delay
     setTimeout(() => {
       const calendlySection = document.getElementById('calendly-widget-section');
       if (calendlySection) {
-        const yOffset = -100; // Offset for header
+        const yOffset = -80;
         const y = calendlySection.getBoundingClientRect().top + window.pageYOffset + yOffset;
         window.scrollTo({top: y, behavior: 'smooth'});
       }
-    }, 500);
+    }, 300);
   };
 
   return (
@@ -120,12 +165,21 @@ const BookingSection = () => {
 
             <Card className="booking-card bg-white border-none shadow-xl mb-8">
               <CardContent className="p-4 md:p-8">
-                {/* Calendly Inline Widget - Using data-url attribute for auto-initialization */}
-                <div 
-                  className="calendly-inline-widget" 
-                  data-url={booking.calendlyUrl}
-                  style={{ minWidth: '320px', height: '700px' }}
-                ></div>
+                {/* Calendly Widget Container */}
+                {!scriptLoaded ? (
+                  <div className="flex items-center justify-center h-[700px]">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8C7A6B] mx-auto mb-4"></div>
+                      <p className="text-[#4A4A4A]">Зареждане на календар...</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div 
+                    ref={calendlyRef}
+                    className="calendly-widget-container"
+                    style={{ minWidth: '320px', minHeight: '700px' }}
+                  ></div>
+                )}
               </CardContent>
             </Card>
 
