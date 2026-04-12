@@ -69,8 +69,8 @@
    - Connect Stripe or PayPal
 
 2. **Set Pricing:**
-   - Single Session: €50
-   - 3-Session Package: €240 (ако искаш да създадеш отделен event type)
+   - Single Session: €51
+   - 3-Session Package: €138
 
 ---
 
@@ -79,7 +79,7 @@
 ```
 1. Клиент → Избира пакет на /book
 2. Клиент → Записва час в Calendly widget
-3. Клиент → Плаща в Calendly (€50 или €240)
+3. Клиент → Плаща в Calendly (€51 или €138)
 4. Calendly → Redirects към /thank-you с параметри
 5. Calendly → Изпраща webhook към /api/calendly/webhook
 6. Backend → Записва booking в database

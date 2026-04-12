@@ -226,7 +226,7 @@ bookings: {
 
 11. **Booking Section**
     - ✅ Calendly inline widget integration
-    - ✅ Dynamic package selection (50 EUR / 130 EUR)
+    - ✅ Dynamic package selection (51 EUR / 138 EUR)
     - ✅ Payment handled via Calendly Pro
 
 12. **Footer**

@@ -152,11 +152,11 @@ https://guided-sessions-2.preview.emergentagent.com/api/calendly/bookings
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  1. Клиент → Избира пакет на /book (€50 или €240)          │
+│  1. Клиент → Избира пакет на /book (€51 или €138)          │
 │  2. Клиент → Вижда Calendly widget                         │
 │  3. Клиент → Избира дата/час                               │
 │  4. Клиент → Въвежда име, email                            │
-│  5. Клиент → Плаща в Calendly (€50 или €240)               │
+│  5. Клиент → Плаща в Calendly (€51 или €138)               │
 │                                                              │
 │  ┌───────────── След успешно плащане ─────────────┐        │
 │  │                                                  │        │
@@ -217,7 +217,7 @@ https://guided-sessions-2.preview.emergentagent.com/api/calendly/bookings
 
 След тези стъпки, пълният flow е готов:
 - ✅ Клиент записва час в Calendly
-- ✅ Плаща (€50 или €240)
+- ✅ Плаща (€51 или €138)
 - ✅ Redirect към Thank You page
 - ✅ Webhook записва booking в database
 - ⏳ (Скоро) Автоматичен confirmation email

@@ -15,7 +15,7 @@ const BookingSection = () => {
     {
       id: 'single',
       name: 'Индивидуална сесия',
-      price: '€50',
+      price: '€51',
       description: '60-90 минути индивидуална онлайн сесия',
       sessions: 1,
       calendlyUrl: booking.calendlyUrls.single
@@ -23,7 +23,7 @@ const BookingSection = () => {
     {
       id: 'package',
       name: 'Пакет 3 сесии',
-      price: '€130',
+      price: '€138',
       description: 'По-дълбока работа върху повтарящи се модели',
       sessions: 3,
       badge: 'Препоръчано',
