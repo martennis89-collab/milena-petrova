@@ -7,6 +7,7 @@ import QuizResults from "./components/quiz/QuizResults";
 import Payment from "./pages/Payment";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import ThankYou from "./pages/ThankYou";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/payment/cancel" element={<PaymentCancel />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -77,6 +77,10 @@ app.include_router(payments_router)
 from routes.calendar import router as calendar_router
 app.include_router(calendar_router)
 
+# Import and include Calendly webhook routes
+from routes.calendly_webhook import router as calendly_router
+app.include_router(calendly_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
