@@ -22,7 +22,7 @@ const Payment = () => {
     single: {
       name: 'Индивидуална сесия',
       price: '€51',
-      description: '60-90 минути индивидуална онлайн сесия',
+      description: '60 минути индивидуална онлайн сесия',
       sessions: 1
     },
     package: {
@@ -119,7 +119,7 @@ const Payment = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#8C7A6B] mt-0.5 flex-shrink-0" />
-                  <span className="text-[#4A4A4A]">60-90 минути индивидуална работа</span>
+                  <span className="text-[#4A4A4A]">60 минути индивидуална работа</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#8C7A6B] mt-0.5 flex-shrink-0" />

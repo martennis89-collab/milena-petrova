@@ -16,7 +16,7 @@ const BookingSection = () => {
       id: 'single',
       name: 'Индивидуална сесия',
       price: '€51',
-      description: '60-90 минути индивидуална онлайн сесия',
+      description: '60 минути индивидуална онлайн сесия',
       sessions: 1,
       calendlyUrl: booking.calendlyUrls.single
     },

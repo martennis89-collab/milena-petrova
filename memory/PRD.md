@@ -198,7 +198,7 @@ bookings: {
 
 5. **Offer Section**
    - Session details (4 items with checkmarks)
-   - Pricing cards (90 лв / 240 лв)
+   - Pricing cards (51 € / 138 €)
    - CTA buttons on each card
 
 6. **How It Works Section**
