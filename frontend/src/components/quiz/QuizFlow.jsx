@@ -17,11 +17,10 @@ const QuizFlow = () => {
 
   const handleAnswerSelect = (answer) => {
     setSelectedAnswer(answer);
-  };
-
-  const handleNext = () => {
-    if (selectedAnswer) {
-      const newAnswers = [...answers, selectedAnswer];
+    
+    // Auto-advance after short delay for visual feedback
+    setTimeout(() => {
+      const newAnswers = [...answers, answer];
       setAnswers(newAnswers);
 
       if (currentQuestion < quizQuestions.length - 1) {
@@ -33,7 +32,7 @@ const QuizFlow = () => {
         // Navigate to results with score
         navigate('/results', { state: { totalScore, answers: newAnswers } });
       }
-    }
+    }, 400); // 400ms delay for visual feedback
   };
 
   const handleBack = () => {
@@ -89,7 +88,7 @@ const QuizFlow = () => {
         </Card>
 
         {/* Navigation Buttons */}
-        <div className="flex items-center justify-between mt-8">
+        <div className="flex items-center justify-start mt-8">
           <Button
             onClick={handleBack}
             variant="outline"
@@ -98,16 +97,6 @@ const QuizFlow = () => {
           >
             <ArrowLeft className="mr-2 w-5 h-5" />
             Назад
-          </Button>
-
-          <Button
-            onClick={handleNext}
-            disabled={!selectedAnswer}
-            size="lg"
-            className="bg-[#8C7A6B] hover:bg-[#6F6154] text-white disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {currentQuestion < quizQuestions.length - 1 ? 'Напред' : 'Виж резултата'}
-            <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </div>
