@@ -95,11 +95,16 @@ Helps women understand and break repeating patterns in relationships
 
 **Results Page Features:**
 - Personalized result type based on quiz score
-- Emotional copy explaining the pattern
-- "Затова" section (why patterns repeat)
-- "Добрата новина е" section (how change happens)
-- Strong CTA: "Запази своята сесия"
-- "Ограничен брой часове на седмица" scarcity message
+- **UPGRADED to high-converting sales page:**
+  - Emotional validation opening (acknowledges past attempts, doubt)
+  - Sharper, more direct explanation
+  - NEW "Как може да ти помогне Милена" section (positioning)
+  - Benefits block (4 key benefits in 2x2 grid)
+  - Urgency block (limited weekly spots)
+  - Qualification block (3 criteria for ideal client)
+  - Improved CTA text: "Запази час и получи яснота"
+  - Trust microcopy: "Запазваш час → плащаш онлайн → получаваш линк"
+  - Auto-scroll to Calendly on booking click
 
 ### ✅ Navigation & Routing
 
