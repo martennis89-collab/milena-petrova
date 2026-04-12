@@ -11,7 +11,7 @@ PAYMENT_PACKAGES = {
     "package": {
         "name": "Пакет 3 сесии",
         "name_en": "3-Session Package",
-        "price": 240.0,
+        "price": 130.0,
         "currency": "eur",
         "description": "По-дълбока работа върху повтарящи се модели",
         "sessions": 3

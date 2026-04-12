@@ -27,7 +27,7 @@ const Payment = () => {
     },
     package: {
       name: 'Пакет 3 сесии',
-      price: '€240',
+      price: '€130',
       description: 'По-дълбока работа върху повтарящи се модели',
       sessions: 3
     }
