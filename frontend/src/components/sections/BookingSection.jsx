@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '../ui/card';
-import { Button } from '../ui/button';
 import { CheckCircle2 } from 'lucide-react';
 import { mockData } from '../../data/mock';
 
@@ -29,29 +28,26 @@ const BookingSection = () => {
   ];
 
   useEffect(() => {
-    // Load Calendly script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
+    // Load Calendly script if not already loaded
+    if (!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
   }, []);
 
   const handlePackageSelect = (packageId) => {
     setSelectedPackage(packageId);
-  };
-
-  const handleProceedToPayment = () => {
-    if (selectedPackage) {
-      // Navigate to payment page with selected package
-      navigate('/payment', { state: { packageId: selectedPackage } });
-    }
+    // Scroll to Calendly section after brief delay
+    setTimeout(() => {
+      const calendlySection = document.getElementById('calendly-widget-section');
+      if (calendlySection) {
+        const yOffset = -100; // Offset for header
+        const y = calendlySection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }
+    }, 500);
   };
 
   return (
@@ -112,10 +108,10 @@ const BookingSection = () => {
 
         {/* Calendly Section - Only show if package selected */}
         {selectedPackage && (
-          <>
+          <div id="calendly-widget-section" className="mt-16">
             <div className="text-center mb-8">
               <h3 className="font-serif text-2xl md:text-3xl text-[#2C2C2C] mb-4">
-                {booking.title}
+                Избери удобен час от календара
               </h3>
               <p className="text-[#4A4A4A] text-lg">
                 След избор на час ще те пренасочим към плащане
@@ -124,7 +120,7 @@ const BookingSection = () => {
 
             <Card className="booking-card bg-white border-none shadow-xl mb-8">
               <CardContent className="p-4 md:p-8">
-                {/* Calendly Inline Widget */}
+                {/* Calendly Inline Widget - Using data-url attribute for auto-initialization */}
                 <div 
                   className="calendly-inline-widget" 
                   data-url={booking.calendlyUrl}
@@ -159,7 +155,7 @@ const BookingSection = () => {
                 </div>
               </CardContent>
             </Card>
-          </>
+          </div>
         )}
 
         {/* Select package reminder */}
