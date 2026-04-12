@@ -20,8 +20,8 @@ const Payment = () => {
 
   const packages = {
     single: {
-      name: 'Единична сесия',
-      price: '€90',
+      name: 'Индивидуална сесия',
+      price: '€50',
       description: '60-90 минути индивидуална онлайн сесия',
       sessions: 1
     },

@@ -14,8 +14,8 @@ const BookingSection = () => {
   const packages = [
     {
       id: 'single',
-      name: 'Единична сесия',
-      price: '€90',
+      name: 'Индивидуална сесия',
+      price: '€50',
       description: '60-90 минути индивидуална онлайн сесия',
       sessions: 1
     },
@@ -159,7 +159,7 @@ const BookingSection = () => {
                 Избери удобен час от календара
               </h3>
               <p className="text-[#4A4A4A] text-lg">
-                След избор на час ще те пренасочим към плащане
+                Calendly ще обработи плащането и ще изпрати потвърждение
               </p>
             </div>
 
@@ -200,11 +200,11 @@ const BookingSection = () => {
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-[#8C7A6B] font-bold">3.</span>
-                    <span>Calendly ще те препрати към плащане с карта</span>
+                    <span>Заплащаш директно в Calendly с карта</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-[#8C7A6B] font-bold">4.</span>
-                    <span>След успешно плащане получаваш потвърждение и линк за срещата</span>
+                    <span>Получаваш потвърждение и Google Meet линк по имейл</span>
                   </div>
                 </div>
               </CardContent>

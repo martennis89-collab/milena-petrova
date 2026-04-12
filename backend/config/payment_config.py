@@ -1,9 +1,9 @@
 # Payment packages configuration
 PAYMENT_PACKAGES = {
     "single": {
-        "name": "Единична сесия",
+        "name": "Индивидуална сесия",
         "name_en": "Single Session",
-        "price": 90.0,
+        "price": 50.0,
         "currency": "eur",
         "description": "60-90 минути индивидуална онлайн сесия",
         "sessions": 1
