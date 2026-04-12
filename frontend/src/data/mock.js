@@ -142,7 +142,7 @@ export const mockData = {
 
   booking: {
     title: "Избери удобен час от календара",
-    calendlyUrl: "https://calendly.com/milenapetrova" // Placeholder
+    calendlyUrl: "https://calendly.com/omba-mp/30min"
   },
 
   footer: {

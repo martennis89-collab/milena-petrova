@@ -129,11 +129,13 @@ Helps women understand and break repeating patterns in relationships
 
 ---
 
-## 🔄 Integration Points (Placeholder/Mock)
+## 🔄 Integration Points
 
-1. **Calendly Integration**
-   - URL placeholder: `https://calendly.com/milenapetrova`
-   - Ready for actual Calendly embed widget
+1. **Calendly Integration** ✅ LIVE
+   - URL: `https://calendly.com/omba-mp/30min`
+   - Inline widget embedded in booking section
+   - Shows "1 Hour Meeting" with Milena Petrova
+   - Fully functional calendar booking
 
 2. **Images**
    - Hero background: Unsplash image
@@ -171,10 +173,10 @@ Helps women understand and break repeating patterns in relationships
 ## 🎯 Next Tasks (Prioritized)
 
 ### P0 - Critical for Launch
-1. **Calendly Integration**
-   - Get real Calendly account link
-   - Embed inline widget in booking section
-   - Test booking flow
+1. ~~**Calendly Integration**~~ ✅ COMPLETED
+   - ✅ Real Calendly account link integrated
+   - ✅ Inline widget embedded in booking section
+   - ✅ Booking flow tested and working
 
 2. **Real Content**
    - Replace portrait placeholder with actual photo
