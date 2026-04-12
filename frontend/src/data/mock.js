@@ -142,7 +142,10 @@ export const mockData = {
 
   booking: {
     title: "Избери удобен час от календара",
-    calendlyUrl: "https://calendly.com/omba-mp/30min"
+    calendlyUrls: {
+      single: "https://calendly.com/omba-mp/30min?primary_color=8c7a6b",
+      package: "https://calendly.com/omba-mp/new-meeting?primary_color=8c7a6b"
+    }
   },
 
   footer: {

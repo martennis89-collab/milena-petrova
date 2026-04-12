@@ -17,7 +17,8 @@ const BookingSection = () => {
       name: 'Индивидуална сесия',
       price: '€50',
       description: '60-90 минути индивидуална онлайн сесия',
-      sessions: 1
+      sessions: 1,
+      calendlyUrl: booking.calendlyUrls.single
     },
     {
       id: 'package',
@@ -25,7 +26,8 @@ const BookingSection = () => {
       price: '€240',
       description: 'По-дълбока работа върху повтарящи се модели',
       sessions: 3,
-      badge: 'Препоръчано'
+      badge: 'Препоръчано',
+      calendlyUrl: booking.calendlyUrls.package
     }
   ];
 
@@ -63,26 +65,26 @@ const BookingSection = () => {
   // Initialize Calendly widget when package is selected and script is loaded
   useEffect(() => {
     if (selectedPackage && scriptLoaded && window.Calendly && calendlyRef.current) {
-      console.log('🔄 Initializing Calendly widget...');
+      console.log('🔄 Initializing Calendly widget for:', selectedPackage.name);
       
       // Clear any existing content
       calendlyRef.current.innerHTML = '';
       
-      // Initialize Calendly widget
+      // Initialize Calendly widget with package-specific URL
       window.Calendly.initInlineWidget({
-        url: booking.calendlyUrl,
+        url: selectedPackage.calendlyUrl,
         parentElement: calendlyRef.current,
         prefill: {},
         utm: {}
       });
       
-      console.log('✅ Calendly widget initialized');
+      console.log('✅ Calendly widget initialized with URL:', selectedPackage.calendlyUrl);
     }
-  }, [selectedPackage, scriptLoaded, booking.calendlyUrl]);
+  }, [selectedPackage, scriptLoaded]);
 
-  const handlePackageSelect = (packageId) => {
-    console.log('📦 Package selected:', packageId);
-    setSelectedPackage(packageId);
+  const handlePackageSelect = (pkg) => {
+    console.log('📦 Package selected:', pkg.name);
+    setSelectedPackage(pkg);
     
     // Scroll to Calendly section after brief delay
     setTimeout(() => {
@@ -111,9 +113,9 @@ const BookingSection = () => {
           {packages.map((pkg) => (
             <Card
               key={pkg.id}
-              onClick={() => handlePackageSelect(pkg.id)}
+              onClick={() => handlePackageSelect(pkg)}
               className={`cursor-pointer transition-all duration-300 ${
-                selectedPackage === pkg.id
+                selectedPackage?.id === pkg.id
                   ? 'border-4 border-[#8C7A6B] shadow-2xl scale-105'
                   : 'border-2 border-[#D8CFC4] hover:border-[#BFAE9F] hover:shadow-lg'
               }`}
@@ -125,7 +127,7 @@ const BookingSection = () => {
                   </div>
                 )}
                 
-                {selectedPackage === pkg.id && (
+                {selectedPackage?.id === pkg.id && (
                   <div className="absolute top-4 left-4">
                     <CheckCircle2 className="w-6 h-6 text-[#8C7A6B]" />
                   </div>
@@ -158,8 +160,11 @@ const BookingSection = () => {
               <h3 className="font-serif text-2xl md:text-3xl text-[#2C2C2C] mb-4">
                 Избери удобен час от календара
               </h3>
-              <p className="text-[#4A4A4A] text-lg">
+              <p className="text-[#4A4A4A] text-lg mb-2">
                 Calendly ще обработи плащането и ще изпрати потвърждение
+              </p>
+              <p className="text-sm text-[#8C7A6B] font-medium">
+                Избран пакет: {selectedPackage.name} - {selectedPackage.price}
               </p>
             </div>
 
