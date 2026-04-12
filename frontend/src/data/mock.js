@@ -79,7 +79,7 @@ export const mockData = {
   about: {
     title: "За Милена",
     text: "Работя с хора, които усещат, че се въртят в повтарящи се житейски ситуации и искат яснота и промяна.\n\nПодходът ми е спокоен, структуриран и съобразен с човека отсреща.\n\nЦелта не е да се дава съвет, а да се види това, което досега е било скрито.",
-    image: "https://images.unsplash.com/photo-1623594675959-02360202d4d6"
+    image: "https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/iqmzyaot_0d9fb4c0-41c8-4c7b-bc02-488dd6b229ca.JPG"
   },
 
   testimonials: {
