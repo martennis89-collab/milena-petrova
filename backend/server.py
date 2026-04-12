@@ -81,6 +81,10 @@ app.include_router(calendar_router)
 from routes.calendly_webhook import router as calendly_router
 app.include_router(calendly_router)
 
+# Import and include Admin routes
+from routes.admin import router as admin_router
+app.include_router(admin_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
