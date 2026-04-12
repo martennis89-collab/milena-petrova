@@ -5,7 +5,7 @@
 **Type:** Conversion-optimized quiz funnel + direct booking page  
 **Language:** Bulgarian  
 **Created:** April 12, 2026  
-**Updated:** April 12, 2026 - Quiz Funnel Added
+**Updated:** April 12, 2026 - Admin Dashboard + Cancellation Tracking Added
 
 ---
 
@@ -75,7 +75,60 @@ Helps women understand and break repeating patterns in relationships
 
 ## 📋 Implemented Features (Apr 12, 2026)
 
-### ✅ Quiz Funnel (NEW - Homepage /)
+### ✅ Admin Dashboard & Booking Tracking (NEW)
+
+**Backend Routes:**
+- `/api/calendly/webhook` - Receives booking/cancellation events from Calendly
+- `/api/admin/login` - Admin authentication (username: admin, password: admin123)
+- `/api/admin/bookings/stats` - Dashboard statistics (total, confirmed, canceled, revenue)
+- `/api/admin/bookings` - All bookings with filters (status, search)
+
+**Frontend Pages:**
+- `/admin/login` - Admin login page
+- `/admin/dashboard` - Main dashboard with:
+  - Stats cards (Total, Confirmed, Canceled, Revenue)
+  - Bookings table with filters
+  - Search by name/email
+  - Status filtering (All/Confirmed/Canceled)
+
+**Features:**
+- ✅ Real-time webhook processing
+- ✅ Automatic status updates for cancellations
+- ✅ Revenue tracking (only confirmed bookings)
+- ✅ Cancellation reason logging
+- ✅ Beautiful UI with color-coded badges
+- ✅ MongoDB storage for all booking data
+
+**Database Schema:**
+```javascript
+bookings: {
+  invitee_email: string,
+  invitee_name: string,
+  invitee_uri: string,
+  event_type_name: string,
+  event_start_time: datetime,
+  event_end_time: datetime,
+  event_uri: string,
+  payment_amount: string,
+  payment_currency: string,
+  payment_status: string,
+  status: "confirmed" | "canceled",
+  cancellation_reason: string (optional),
+  canceled_at: datetime (optional),
+  created_at: datetime,
+  updated_at: datetime
+}
+```
+
+**Files:**
+- `/app/backend/routes/calendly_webhook.py` - Webhook handler
+- `/app/backend/routes/admin.py` - Admin API
+- `/app/frontend/src/pages/AdminDashboard.jsx` - Dashboard UI
+- `/app/frontend/src/pages/AdminLogin.jsx` - Login UI
+
+---
+
+
 
 **Components Created:**
 - `/app/frontend/src/components/Header.jsx` - Fixed header with navigation
@@ -172,8 +225,9 @@ Helps women understand and break repeating patterns in relationships
     - Gradient background
 
 11. **Booking Section**
-    - Calendly placeholder (ready for integration)
-    - Calendar icon
+    - ✅ Calendly inline widget integration
+    - ✅ Dynamic package selection (50 EUR / 130 EUR)
+    - ✅ Payment handled via Calendly Pro
 
 12. **Footer**
     - Website name and email
@@ -248,6 +302,9 @@ Helps women understand and break repeating patterns in relationships
    - ✅ Real Calendly account link integrated
    - ✅ Inline widget embedded in booking section
    - ✅ Booking flow tested and working
+   - ✅ Calendly Webhooks configured
+   - ✅ Admin Dashboard tracks bookings
+   - ✅ Automatic cancellation tracking
 
 2. **Real Content**
    - Replace portrait placeholder with actual photo
