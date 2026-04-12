@@ -31,6 +31,10 @@ button, a, .card, .testimonial-card, .pricing-card {
   animation: fadeIn 1s ease-in;
 }
 
+.quiz-hero {
+  animation: fadeIn 1s ease-in;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -54,6 +58,10 @@ button, a, .card, .testimonial-card, .pricing-card {
 
 .cta-buttons {
   animation: slideUp 0.8s ease-out 0.8s both;
+}
+
+.animate-fadeIn {
+  animation: slideUp 0.8s ease-out both;
 }
 
 @keyframes slideUp {
@@ -106,7 +114,9 @@ button:active {
 }
 
 /* Subtle Background Pattern */
-.milena-website {
+.milena-website,
+.quiz-funnel-page,
+.direct-booking-page {
   background-color: #F5F1EB;
 }
 
@@ -128,4 +138,19 @@ a:focus-visible {
 ::selection {
   background-color: #8C7A6B;
   color: white;
+}
+
+/* Header Styles */
+.header {
+  backdrop-filter: blur(12px);
+}
+
+/* Quiz Answer Buttons */
+.quiz-flow button {
+  cursor: pointer;
+}
+
+.quiz-flow button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }

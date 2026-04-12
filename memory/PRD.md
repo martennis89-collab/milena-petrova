@@ -2,9 +2,10 @@
 ## Milena Petrova Personal Brand Website
 
 **Project:** milenapetrova.bg  
-**Type:** One-page premium landing website  
+**Type:** Conversion-optimized quiz funnel + direct booking page  
 **Language:** Bulgarian  
 **Created:** April 12, 2026  
+**Updated:** April 12, 2026 - Quiz Funnel Added
 
 ---
 
@@ -15,7 +16,32 @@ Generate bookings for paid online sessions focused on:
 - Family dynamics  
 - Generational patterns
 
-**Primary CTA:** "Запази час" (Book a time)
+**Primary Conversion Flow:** Quiz Funnel (80% of users)  
+**Secondary Flow:** Direct Booking (20% of users)
+
+---
+
+## 🔀 Two-Flow Architecture
+
+### Flow 1: Quiz Funnel (Homepage - /)
+**Purpose:** Emotional diagnostic → personalized result → booking conversion
+
+**User Journey:**
+1. **Hero Section** - Compelling headline + "Направи теста" CTA
+2. **Quiz (6 questions)** - Step-by-step, 1 question per screen, progress bar
+3. **Results Page** - Personalized result type + emotional copy + booking CTA
+4. **Booking** - Redirects to /book#booking-section
+
+**Conversion Points:**
+- Primary CTA: "Направи теста"
+- Secondary CTA: "Запази час директно"
+- Results page: "Запази час сега"
+
+### Flow 2: Direct Booking Page (/book, /session)
+**Purpose:** Quick conversion for already-convinced users
+
+**Sections:** Full original website preserved
+- Hero, Identification, Reframe, Method, Offer, How It Works, About, Testimonials, FAQ, Final CTA, Booking
 
 ---
 
@@ -49,7 +75,47 @@ Helps women understand and break repeating patterns in relationships
 
 ## 📋 Implemented Features (Apr 12, 2026)
 
-### ✅ Frontend (Mock Data Phase)
+### ✅ Quiz Funnel (NEW - Homepage /)
+
+**Components Created:**
+- `/app/frontend/src/components/Header.jsx` - Fixed header with navigation
+- `/app/frontend/src/components/quiz/QuizHero.jsx` - Landing hero with CTAs
+- `/app/frontend/src/components/quiz/QuizFlow.jsx` - Step-by-step quiz (6 questions)
+- `/app/frontend/src/components/quiz/QuizResults.jsx` - Dynamic results page
+- `/app/frontend/src/data/quizData.js` - Quiz logic and scoring
+- `/app/frontend/src/pages/QuizFunnel.jsx` - Main quiz funnel page
+
+**Quiz Features:**
+- 6 diagnostic questions about relationship patterns
+- Progress bar showing completion (17%, 33%, 50%, etc.)
+- Visual answer selection with hover states
+- Back/Forward navigation
+- Scoring algorithm (0-18 points)
+- 3 result types: Активен родов модел, Емоционален модел, Смесен модел
+
+**Results Page Features:**
+- Personalized result type based on quiz score
+- Emotional copy explaining the pattern
+- "Затова" section (why patterns repeat)
+- "Добрата новина е" section (how change happens)
+- Strong CTA: "Запази своята сесия"
+- "Ограничен брой часове на седмица" scarcity message
+
+### ✅ Navigation & Routing
+
+**Routes:**
+- `/` → Quiz Funnel (Hero + Quiz start)
+- `/quiz` → Quiz flow (6 questions)
+- `/results` → Results page (dynamic based on answers)
+- `/book` → Direct booking (full original site)
+- `/session` → Direct booking (alias)
+
+**Header Navigation:**
+- Logo: "milenapetrova.bg" (links to /)
+- Button: "Директно записване" (links to /book)
+- Fixed position, backdrop blur effect
+
+### ✅ Frontend (Direct Booking - /book)
 
 **11 Complete Sections:**
 
