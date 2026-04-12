@@ -167,7 +167,7 @@ const BookingSection = () => {
               <CardContent className="p-4 md:p-8">
                 {/* Calendly Widget Container */}
                 {!scriptLoaded ? (
-                  <div className="flex items-center justify-center h-[700px]">
+                  <div className="flex items-center justify-center" style={{ height: '700px' }}>
                     <div className="text-center">
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8C7A6B] mx-auto mb-4"></div>
                       <p className="text-[#4A4A4A]">Зареждане на календар...</p>
@@ -177,7 +177,7 @@ const BookingSection = () => {
                   <div 
                     ref={calendlyRef}
                     className="calendly-widget-container"
-                    style={{ minWidth: '320px', minHeight: '700px' }}
+                    style={{ width: '100%', height: '700px', minHeight: '700px' }}
                   ></div>
                 )}
               </CardContent>
