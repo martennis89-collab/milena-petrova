@@ -73,6 +73,10 @@ app.include_router(api_router)
 from routes.payments import router as payments_router
 app.include_router(payments_router)
 
+# Import and include calendar routes
+from routes.calendar import router as calendar_router
+app.include_router(calendar_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
