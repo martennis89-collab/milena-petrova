@@ -1,0 +1,131 @@
+/* Milena Petrova Website Styles */
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Typography - Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.font-serif,
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.hero-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Smooth transitions for interactive elements */
+button, a, .card, .testimonial-card, .pricing-card {
+  transition-property: background-color, border-color, color, transform, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Hero Section Animations */
+.hero-section {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-headline {
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.hero-subheadline {
+  animation: slideUp 0.8s ease-out 0.4s both;
+}
+
+.trust-line {
+  animation: slideUp 0.8s ease-out 0.6s both;
+}
+
+.cta-buttons {
+  animation: slideUp 0.8s ease-out 0.8s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Fade In on Scroll */
+section {
+  animation: fadeInSection 0.6s ease-out;
+}
+
+@keyframes fadeInSection {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects */
+.bullet-item:hover,
+.step-item:hover,
+.benefit-item:hover {
+  transform: translateX(4px);
+}
+
+/* Button Hover Effects */
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Card Hover Effects */
+.pricing-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Subtle Background Pattern */
+.milena-website {
+  background-color: #F5F1EB;
+}
+
+/* Prevent color bleed on images */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus States for Accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #8C7A6B;
+  outline-offset: 2px;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #8C7A6B;
+  color: white;
+}
