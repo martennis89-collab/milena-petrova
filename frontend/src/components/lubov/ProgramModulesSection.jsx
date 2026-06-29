@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, CheckCircle } from 'lucide-react';
+import { FaChevronDown, FaCheckCircle } from 'react-icons/fa';
 import { trackEvent } from '../../utils/tracking';
 
 const ModuleCard = ({ module, index }) => {
@@ -28,7 +28,7 @@ const ModuleCard = ({ module, index }) => {
             {module.title}
           </h3>
         </div>
-        <ChevronDown 
+        <FaChevronDown 
           className={`w-6 h-6 text-[#8C7A6B] flex-shrink-0 ml-4 transition-transform duration-200 ${isExpanded ? 'transform rotate-180' : ''}`}
         />
       </button>
@@ -42,7 +42,7 @@ const ModuleCard = ({ module, index }) => {
           <div className="space-y-3 mb-6">
             {module.bullets.map((bullet, idx) => (
               <div key={idx} className="flex items-start">
-                <CheckCircle className="w-5 h-5 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
+                <FaCheckCircle className="w-5 h-5 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
                 <p className="ml-3 text-[#4A4A4A]">{bullet}</p>
               </div>
             ))}

@@ -1,14 +1,14 @@
 import React from 'react';
 import CheckoutCTA from './CheckoutCTA';
 import LUBOV_BEZ_BOLKA_CONFIG from '../../config/lubovBezBolka';
-import { Video, BookOpen, Heart, Monitor } from 'lucide-react';
+import { FaVideo, FaBook, FaHeart, FaDesktop } from 'react-icons/fa';
 
 const HeroSection = () => {
   const trustBadges = [
-    { icon: Video, text: '16 видео урока' },
-    { icon: BookOpen, text: 'Работна тетрадка' },
-    { icon: Heart, text: 'Водени практики' },
-    { icon: Monitor, text: 'Онлайн достъп' },
+    { icon: FaVideo, text: '16 видео урока' },
+    { icon: FaBook, text: 'Работна тетрадка' },
+    { icon: FaHeart, text: 'Водени практики' },
+    { icon: FaDesktop, text: 'Онлайн достъп' },
   ];
   
   return (

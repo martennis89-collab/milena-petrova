@@ -1,25 +1,25 @@
 import React from 'react';
-import { ShoppingCart, Mail, Key, Play } from 'lucide-react';
+import { FaShoppingCart, FaEnvelope, FaKey, FaPlay } from 'react-icons/fa';
 
 const HowAccessWorksSection = () => {
   const steps = [
     {
-      icon: ShoppingCart,
+      icon: FaShoppingCart,
       title: 'Завършваш поръчката',
       description: 'Завършваш поръчката през защитена checkout страница.',
     },
     {
-      icon: Mail,
+      icon: FaEnvelope,
       title: 'Получаваш имейл',
       description: 'Получаваш имейл с достъп до програмата.',
     },
     {
-      icon: Key,
+      icon: FaKey,
       title: 'Създаваш парола',
       description: 'В имейла има потребителско име и линк за създаване на парола.',
     },
     {
-      icon: Play,
+      icon: FaPlay,
       title: 'Започваш програмата',
       description: 'Влизаш в платформата и започваш с първия урок.',
     },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle } from 'lucide-react';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const WhatIsSection = () => {
   const learnings = [
@@ -37,7 +37,7 @@ const WhatIsSection = () => {
                 key={index}
                 className="flex items-start"
               >
-                <CheckCircle className="w-6 h-6 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
+                <FaCheckCircle className="w-6 h-6 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
                 <p className="ml-3 text-[#4A4A4A] text-lg">
                   {item}
                 </p>

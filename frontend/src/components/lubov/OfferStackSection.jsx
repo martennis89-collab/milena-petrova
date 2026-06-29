@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check } from 'lucide-react';
+import { FaCheck } from 'react-icons/fa';
 import CheckoutCTA from './CheckoutCTA';
 import LUBOV_BEZ_BOLKA_CONFIG from '../../config/lubovBezBolka';
 
@@ -33,7 +33,7 @@ const OfferStackSection = () => {
                   className="flex items-center"
                 >
                   <div className="w-6 h-6 rounded-full bg-[#8C7A6B] flex items-center justify-center flex-shrink-0">
-                    <Check className="w-4 h-4 text-white" />
+                    <FaCheck className="w-4 h-4 text-white" />
                   </div>
                   <p className="ml-4 text-lg text-[#2C3E50]">
                     {item}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { FaTimes } from 'react-icons/fa';
 
 const WhoThisIsNotForSection = () => {
   const notForYouIf = [
@@ -22,7 +22,7 @@ const WhoThisIsNotForSection = () => {
               key={index}
               className="flex items-start p-6 bg-gray-50 rounded-xl border border-gray-200"
             >
-              <X className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" />
+              <FaTimes className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5" />
               <p className="ml-4 text-[#4A4A4A] leading-relaxed">
                 {item}
               </p>

@@ -1,25 +1,25 @@
 import React from 'react';
-import { Eye, Brain, Shield, Heart } from 'lucide-react';
+import { FaEye, FaBrain, FaShieldAlt, FaHeart } from 'react-icons/fa';
 
 const MethodSection = () => {
   const steps = [
     {
-      icon: Eye,
+      icon: FaEye,
       title: 'Разпознаване',
       text: 'Първо започваш да виждаш цикъла, вместо да гледаш само отделните ситуации.',
     },
     {
-      icon: Brain,
+      icon: FaBrain,
       title: 'Разбиране',
       text: 'После разбираш защо този модел може да се усеща толкова познат, дори когато те боли.',
     },
     {
-      icon: Shield,
+      icon: FaShieldAlt,
       title: 'Граници',
       text: 'Започваш да връщаш усещането за себе си, своите нужди и своето „не".',
     },
     {
-      icon: Heart,
+      icon: FaHeart,
       title: 'Нов избор',
       text: 'Постепенно започваш да избираш не от страх, а от повече яснота и връзка със себе си.',
     },
@@ -65,3 +65,4 @@ const MethodSection = () => {
 };
 
 export default MethodSection;
+;

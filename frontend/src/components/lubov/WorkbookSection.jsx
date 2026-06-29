@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle } from 'lucide-react';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const WorkbookSection = () => {
   const workbookUses = [
@@ -61,7 +61,7 @@ const WorkbookSection = () => {
             <div className="space-y-3 mb-8">
               {workbookUses.map((use, index) => (
                 <div key={index} className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
+                  <FaCheckCircle className="w-5 h-5 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
                   <p className="ml-3 text-[#4A4A4A]">{use}</p>
                 </div>
               ))}

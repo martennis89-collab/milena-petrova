@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check } from 'lucide-react';
+import { FaCheck } from 'react-icons/fa';
 
 const WhoThisIsForSection = () => {
   const forYouIf = [
@@ -25,7 +25,7 @@ const WhoThisIsForSection = () => {
               key={index}
               className="flex items-start p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
             >
-              <Check className="w-6 h-6 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
+              <FaCheck className="w-6 h-6 text-[#8C7A6B] flex-shrink-0 mt-0.5" />
               <p className="ml-4 text-[#4A4A4A] leading-relaxed">
                 {item}
               </p>

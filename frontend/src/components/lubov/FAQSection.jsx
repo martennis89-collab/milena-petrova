@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { FaChevronDown } from 'react-icons/fa';
 import { trackEvent } from '../../utils/tracking';
 
 const FAQItem = ({ question, answer, index }) => {
@@ -21,7 +21,7 @@ const FAQItem = ({ question, answer, index }) => {
         <span className="text-lg font-medium text-[#2C3E50] pr-4">
           {question}
         </span>
-        <ChevronDown 
+        <FaChevronDown 
           className={`w-5 h-5 text-[#8C7A6B] flex-shrink-0 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`}
         />
       </button>
