@@ -116,7 +116,7 @@ const OfferStackSection = () => {
                 <div className="space-y-3 max-w-md mx-auto">
                   <div className="flex justify-between items-center text-gray-600">
                     <span>Онлайн програма (регулярна цена)</span>
-                    <span className="font-medium text-lg">{LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE}</span>
+                    <span className="font-medium text-lg">79 euro</span>
                   </div>
                   
                   <div className="flex justify-between items-center text-gray-600">
@@ -128,7 +128,7 @@ const OfferStackSection = () => {
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-[#2C3E50] text-lg">Обща стойност:</span>
                       <span className="text-3xl font-bold text-gray-400 line-through">
-                        {LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120}€
+                        199€
                       </span>
                     </div>
                   </div>
@@ -158,7 +158,7 @@ const OfferStackSection = () => {
                 <div className="inline-block bg-green-500 text-white px-8 py-4 rounded-2xl shadow-lg">
                   <p className="text-sm font-medium mb-1">Спестяваш</p>
                   <p className="text-4xl font-bold">
-                    {(LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120) - LUBOV_BEZ_BOLKA_CONFIG.PRICE_NUMERIC}€
+                    150€
                   </p>
                 </div>
               </div>
