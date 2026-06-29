@@ -99,96 +99,88 @@ const OfferStackSection = () => {
               </div>
             </div>
             
-            {/* Value Stack Summary */}
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 mb-6 border-2 border-gray-200">
-              <h3 className="text-lg font-serif text-[#2C3E50] mb-4 text-center">
-                Обща стойност на програмата:
-              </h3>
+            {/* COMBINED: Value Stack + Price + Scarcity - Single Unified Section */}
+            <div className="bg-gradient-to-br from-[#F5F1EB] to-white rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden border-2 border-[#8C7A6B]/20">
               
-              <div className="space-y-3 mb-4">
-                <div className="flex justify-between items-center text-gray-600">
-                  <span>Онлайн програма (регулярна цена)</span>
-                  <span className="font-medium">{LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE}</span>
-                </div>
-                
-                <div className="flex justify-between items-center text-gray-600">
-                  <span>Бонус: Частна сесия с Милена</span>
-                  <span className="font-medium">{bonusOffer.value}</span>
-                </div>
-                
-                <div className="border-t-2 border-gray-300 pt-3 flex justify-between items-center">
-                  <span className="font-bold text-[#2C3E50]">Обща стойност:</span>
-                  <span className="text-2xl font-bold text-gray-400 line-through">
-                    {LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120}€
-                  </span>
-                </div>
+              {/* Discount badge - top right */}
+              <div className="absolute top-6 right-6 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold shadow-lg">
+                -38%
               </div>
               
-              <div className="bg-white rounded-xl p-4 border-2 border-[#8C7A6B]">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-sm text-[#8C7A6B] mb-1">Плащаш днес само:</p>
-                    <p className="text-4xl font-bold text-[#2C3E50]">
-                      {LUBOV_BEZ_BOLKA_CONFIG.PRICE}
-                    </p>
+              {/* Value breakdown */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-serif text-[#2C3E50] mb-6 text-center">
+                  Обща стойност на програмата:
+                </h3>
+                
+                <div className="space-y-3 max-w-md mx-auto">
+                  <div className="flex justify-between items-center text-gray-600">
+                    <span>Онлайн програма (регулярна цена)</span>
+                    <span className="font-medium text-lg">{LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE}</span>
                   </div>
-                  <div className="text-right">
-                    <div className="bg-green-500 text-white px-4 py-2 rounded-lg">
-                      <p className="text-xs font-medium">Спестяваш</p>
-                      <p className="text-2xl font-bold">
-                        {(LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120) - LUBOV_BEZ_BOLKA_CONFIG.PRICE_NUMERIC}€
-                      </p>
+                  
+                  <div className="flex justify-between items-center text-gray-600">
+                    <span>Бонус: Частна сесия с Милена</span>
+                    <span className="font-medium text-lg">{bonusOffer.value}</span>
+                  </div>
+                  
+                  <div className="border-t-2 border-gray-300 pt-3 mt-3">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-[#2C3E50] text-lg">Обща стойност:</span>
+                      <span className="text-3xl font-bold text-gray-400 line-through">
+                        {LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120}€
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Price with discount */}
-            <div className="bg-[#F5F1EB] rounded-2xl p-8 mb-6 text-center relative overflow-hidden">
-              {/* Discount badge */}
-              <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                -{Math.round(((LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC - LUBOV_BEZ_BOLKA_CONFIG.PRICE_NUMERIC) / LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC) * 100)}%
+              
+              {/* Main price display */}
+              <div className="text-center mb-8">
+                <p className="text-sm text-[#8C7A6B] uppercase tracking-wide mb-2">
+                  Плащаш днес само:
+                </p>
+                
+                <div className="mb-4">
+                  <span className="text-3xl text-gray-400 line-through mr-4">
+                    {LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE}
+                  </span>
+                  <span className="text-6xl md:text-7xl font-serif text-[#2C3E50] font-bold">
+                    49€
+                  </span>
+                </div>
+                
+                <p className="text-base text-[#4A4A4A] mb-6">
+                  еднократно плащане
+                </p>
+                
+                {/* Savings badge */}
+                <div className="inline-block bg-green-500 text-white px-8 py-4 rounded-2xl shadow-lg">
+                  <p className="text-sm font-medium mb-1">Спестяваш</p>
+                  <p className="text-4xl font-bold">
+                    {(LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE_NUMERIC + 120) - LUBOV_BEZ_BOLKA_CONFIG.PRICE_NUMERIC}€
+                  </p>
+                </div>
               </div>
-              
-              <p className="text-sm text-[#8C7A6B] uppercase tracking-wide mb-2">
-                Цена
-              </p>
-              
-              {/* Original price strikethrough */}
-              <div className="mb-2">
-                <span className="text-2xl text-gray-400 line-through">
-                  {LUBOV_BEZ_BOLKA_CONFIG.ORIGINAL_PRICE}
-                </span>
-              </div>
-              
-              {/* Current price */}
-              <p className="text-5xl font-serif text-[#2C3E50] mb-2">
-                {LUBOV_BEZ_BOLKA_CONFIG.PRICE}
-              </p>
-              
-              <p className="text-sm text-[#4A4A4A] mb-4">
-                еднократно плащане
-              </p>
               
               {/* Scarcity counter */}
-              <div className="bg-white rounded-xl p-4 border-2 border-[#8C7A6B]/30">
-                <div className="flex items-center justify-center gap-2 mb-3">
-                  <FaClock className="w-4 h-4 text-[#8C7A6B]" />
-                  <p className="text-sm font-medium text-[#2C3E50]">
+              <div className="bg-white rounded-2xl p-6 shadow-md border-2 border-[#8C7A6B]/30">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <FaClock className="w-5 h-5 text-[#8C7A6B]" />
+                  <p className="text-lg font-bold text-[#2C3E50]">
                     Остават само {spotsRemaining} места на тази цена
                   </p>
                 </div>
                 
                 {/* Progress bar */}
-                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden mb-3">
                   <div 
                     className="bg-gradient-to-r from-[#8C7A6B] to-[#BFAE9F] h-full rounded-full transition-all duration-500"
                     style={{ width: `${percentageFilled}%` }}
                   ></div>
                 </div>
                 
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-sm text-gray-500 text-center">
                   {spotsTaken} от {spotsTotal} места вече са заети
                 </p>
               </div>
