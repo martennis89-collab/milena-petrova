@@ -102,9 +102,9 @@ const OfferStackSection = () => {
             {/* COMBINED: Value Stack + Price + Scarcity - Single Unified Section */}
             <div className="bg-gradient-to-br from-[#F5F1EB] to-white rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden border-2 border-[#8C7A6B]/20">
               
-              {/* Discount badge - top right */}
+              {/* Discount badge - top right (75% off total value) */}
               <div className="absolute top-6 right-6 bg-red-500 text-white px-4 py-2 rounded-full text-lg font-bold shadow-lg">
-                -38%
+                -75%
               </div>
               
               {/* Value breakdown */}
