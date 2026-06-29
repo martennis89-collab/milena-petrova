@@ -53,6 +53,13 @@ const HeroSection = () => {
               </p>
             </div>
             
+            {/* Discount notice */}
+            <div className="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border-l-4 border-red-500">
+              <p className="text-sm text-red-700 font-medium">
+                🔥 Специална цена 49€ (вместо 79€) за първите 20 закупили
+              </p>
+            </div>
+            
             {/* Primary CTA */}
             <div className="mb-6">
               <CheckoutCTA 
