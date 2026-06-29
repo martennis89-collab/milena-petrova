@@ -7,8 +7,8 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
   // Pricing
   PRICE: '49 euro',
   PRICE_NUMERIC: 49,
-  ORIGINAL_PRICE: '199 euro',
-  ORIGINAL_PRICE_NUMERIC: 199,
+  ORIGINAL_PRICE: '79 euro',
+  ORIGINAL_PRICE_NUMERIC: 79,
   CURRENCY: 'EUR',
   
   // Discount campaign
