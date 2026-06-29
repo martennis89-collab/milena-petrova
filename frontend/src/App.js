@@ -10,6 +10,7 @@ import PaymentCancel from "./pages/PaymentCancel";
 import ThankYou from "./pages/ThankYou";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import LubovBezBolka from "./pages/LubovBezBolka";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/results" element={<QuizResults />} />
           <Route path="/book" element={<DirectBooking />} />
           <Route path="/session" element={<DirectBooking />} />
+          <Route path="/lubov-bez-bolka" element={<LubovBezBolka />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/payment/cancel" element={<PaymentCancel />} />
