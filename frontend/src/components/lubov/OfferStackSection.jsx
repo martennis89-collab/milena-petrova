@@ -5,14 +5,14 @@ import LUBOV_BEZ_BOLKA_CONFIG from '../../config/lubovBezBolka';
 
 const OfferStackSection = () => {
   const offerItems = [
-    '16 видео урока',
+    '14 видео урока',
     '4 основни модула',
     '1 бонус модул',
     'брандирана работна тетрадка',
     'водени практики',
     'достъп през онлайн платформа',
     'гледане със собствено темпо',
-    `достъп: ${LUBOV_BEZ_BOLKA_CONFIG.ACCESS_DURATION}`,
+    'веднъж закупен, достъп завинаги',
   ];
   
   return (

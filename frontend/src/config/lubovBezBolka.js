@@ -38,7 +38,7 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
   PROGRAM: {
     NAME: 'Любов без болка',
     SUBTITLE: 'Онлайн програма на Милена Петрова',
-    VIDEO_COUNT: 16,
+    VIDEO_COUNT: 14,
     MODULE_COUNT: 4,
     BONUS_MODULE_COUNT: 1,
   },

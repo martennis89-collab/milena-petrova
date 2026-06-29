@@ -5,7 +5,7 @@ import { FaVideo, FaBook, FaHeart, FaDesktop } from 'react-icons/fa';
 
 const HeroSection = () => {
   const trustBadges = [
-    { icon: FaVideo, text: '16 видео урока' },
+    { icon: FaVideo, text: '14 видео урока' },
     { icon: FaBook, text: 'Работна тетрадка' },
     { icon: FaHeart, text: 'Водени практики' },
     { icon: FaDesktop, text: 'Онлайн достъп' },
