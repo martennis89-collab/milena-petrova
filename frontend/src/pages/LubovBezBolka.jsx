@@ -28,42 +28,26 @@ const LubovBezBolka = () => {
     // Setup scroll depth tracking
     const cleanupScroll = setupScrollTracking();
     
-    // Hide Emergent badge with JavaScript
+    // Hide Emergent badge with JavaScript - simplified
     const hideEmergentBadge = () => {
-      // Find and hide "Made with Emergent" badge
-      const allLinks = document.querySelectorAll('a');
-      allLinks.forEach(link => {
-        if (link.href && (link.href.includes('emergent') || link.textContent.includes('Emergent') || link.textContent.includes('emergent'))) {
-          link.style.display = 'none';
-          if (link.parentElement) {
-            link.parentElement.style.display = 'none';
-          }
-        }
-      });
+      // Target specific badge by ID
+      const badge = document.querySelector('#emergent-badge');
+      if (badge) {
+        badge.style.display = 'none';
+      }
       
-      // Hide any fixed bottom-right elements (common badge position)
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' && 
-            (style.bottom === '0px' || style.bottom === '20px' || style.bottom === '16px') &&
-            (style.right === '0px' || style.right === '20px' || style.right === '16px')) {
-          const text = el.textContent.toLowerCase();
-          if (text.includes('emergent') || text.includes('made with')) {
-            el.style.display = 'none';
-          }
+      // Target links with emergent in href
+      const emergentLinks = document.querySelectorAll('a[href*="emergent"]');
+      emergentLinks.forEach(link => {
+        if (link.textContent.toLowerCase().includes('made with')) {
+          link.style.display = 'none';
         }
       });
     };
     
-    // Run immediately and after a delay
-    hideEmergentBadge();
-    setTimeout(hideEmergentBadge, 1000);
-    setTimeout(hideEmergentBadge, 3000);
-    
-    // Watch for DOM changes
-    const observer = new MutationObserver(hideEmergentBadge);
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Run after component mounts
+    setTimeout(hideEmergentBadge, 500);
+    setTimeout(hideEmergentBadge, 2000);
     
     // Meta Pixel initialization (when pixel ID is provided)
     if (LUBOV_BEZ_BOLKA_CONFIG.META_PIXEL_ID && typeof window !== 'undefined') {
@@ -107,27 +91,18 @@ const LubovBezBolka = () => {
         
         {/* Hide Emergent badge */}
         <style>{`
-          /* Hide Emergent badge - comprehensive selectors */
+          /* Hide Emergent badge - valid CSS selectors only */
           [class*="emergent"], 
           [class*="Emergent"],
           [id*="emergent"],
           [id*="Emergent"],
           a[href*="emergentagent"],
           a[href*="emergent.com"],
-          a:has(p:contains("Made with Emergent")),
-          a > p:contains("Made with Emergent"),
-          [style*="position: fixed"][style*="bottom"][style*="right"],
-          div[style*="z-index: 999"],
-          div[style*="z-index: 9999"] {
+          #emergent-badge {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
-          }
-          
-          /* Additional broad hiding */
-          body > div:last-child:has(a[href*="emergent"]) {
-            display: none !important;
           }
         `}</style>
       </Helmet>
