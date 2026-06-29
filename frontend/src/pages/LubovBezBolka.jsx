@@ -46,11 +46,22 @@ const LubovBezBolka = () => {
         <meta name="description" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.DESCRIPTION} />
         <meta name="keywords" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.KEYWORDS} />
         
-        {/* Open Graph tags */}
-        <meta property="og:title" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.TITLE} />
-        <meta property="og:description" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.DESCRIPTION} />
+        {/* Open Graph tags for Facebook/Social sharing */}
+        <meta property="og:site_name" content="Милена Петрова" />
+        <meta property="og:title" content="Любов без болка - Онлайн програма за жени в токсични връзки" />
+        <meta property="og:description" content="14 видео урока + работна тетрадка + бонус частна сесия с Милена. Научи се да разпознаеш болезнените модели и да избираш любов без болка. Специална цена 49€ (вместо 199€) за първите 20." />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={LUBOV_BEZ_BOLKA_CONFIG.MILENA_PHOTO} />
+        <meta property="og:url" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.OG_URL} />
+        <meta property="og:image" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.OG_IMAGE} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Любов без болка - Онлайн програма на Милена Петрова" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Любов без болка - Онлайн програма за жени в токсични връзки" />
+        <meta name="twitter:description" content="14 видео урока + работна тетрадка + бонус частна сесия. Специална цена 49€ за първите 20." />
+        <meta name="twitter:image" content={LUBOV_BEZ_BOLKA_CONFIG.SEO.OG_IMAGE} />
         
         {/* Mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
