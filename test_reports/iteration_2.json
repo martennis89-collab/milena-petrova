@@ -1,0 +1,23 @@
+{
+  "summary": "Verified Open Graph meta tags for /lubov-bez-bolka are correctly served in raw HTML for Facebook scraper (no JS execution required). Fetched the page using facebookexternalhit user-agent and confirmed all required OG tags are present with correct content. The wrong title 'Emergent | Fullstack App' is fully removed.",
+  "tested_scope": ["frontend", "integration"],
+  "passed": [
+    "Raw HTML title is 'Милена Петрова - Коуч и ментор за лична трансформация' (NOT 'Emergent | Fullstack App')",
+    "og:title = 'Любов без болка - Онлайн програма | Милена Петрова'",
+    "og:description contains '14 видео урока' and '49€' as required",
+    "og:url = 'https://milenapetrova.bg/lubov-bez-bolka'",
+    "og:image points to Milena's photo (customer-assets.emergentagent.com/.../z6q4f8xp_00BBF565...jpeg)",
+    "og:type = 'website', og:site_name = 'Милена Петрова' present",
+    "og:image:width=1200, og:image:height=630, og:image:alt present (Facebook recommended dimensions)",
+    "Twitter card tags (twitter:card, twitter:title, twitter:description, twitter:image) present",
+    "No occurrence of 'Emergent | Fullstack App' anywhere in served HTML",
+    "Tags are served statically in index.html — Facebook crawler (no JS) will see them"
+  ],
+  "failed": [],
+  "action_items": [
+    "After deployment to production, run the URL through Facebook Sharing Debugger (https://developers.facebook.com/tools/debug/) and click 'Scrape Again' to refresh Facebook's cached preview."
+  ],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true
+}
