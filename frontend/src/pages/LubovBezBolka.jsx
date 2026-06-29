@@ -57,7 +57,6 @@ const LubovBezBolka = () => {
     
     return () => {
       if (cleanupScroll) cleanupScroll();
-      observer.disconnect();
     };
   }, []);
   
