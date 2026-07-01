@@ -84,15 +84,88 @@ export const getUTMParamsWithFallback = () => {
 };
 
 /**
- * Track event (console log for now, will integrate with Meta Pixel)
+ * Get Facebook Browser ID (_fbp cookie) for Conversions API
+ */
+export const getFacebookBrowserId = () => {
+  if (typeof document === 'undefined') return null;
+  
+  const fbpCookie = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('_fbp='));
+  
+  return fbpCookie ? fbpCookie.split('=')[1] : null;
+};
+
+/**
+ * Get Facebook Click ID (_fbc cookie) for Conversions API
+ */
+export const getFacebookClickId = () => {
+  if (typeof document === 'undefined') return null;
+  
+  const fbcCookie = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('_fbc='));
+  
+  return fbcCookie ? fbcCookie.split('=')[1] : null;
+};
+
+/**
+ * Send event to server for Facebook Conversions API
+ */
+export const sendServerSideEvent = async (eventName, eventData = {}) => {
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  
+  if (!apiUrl) {
+    console.warn('Backend URL not configured');
+    return;
+  }
+  
+  try {
+    const fbp = getFacebookBrowserId();
+    const fbc = getFacebookClickId();
+    const eventId = `${eventName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    const payload = {
+      event_name: eventName,
+      event_source_url: window.location.href,
+      fbp,
+      fbc,
+      event_id: eventId,
+      custom_data: eventData
+    };
+    
+    const response = await fetch(`${apiUrl}/api/facebook/track-event`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (response.ok) {
+      console.log('✅ Server-side event sent:', eventName);
+    } else {
+      console.warn('⚠️ Server-side event failed:', eventName);
+    }
+  } catch (error) {
+    console.error('Error sending server-side event:', error);
+  }
+};
+
+/**
+ * Track event (browser Pixel + server-side Conversions API)
  */
 export const trackEvent = (eventName, eventData = {}) => {
   console.log('[Track Event]', eventName, eventData);
   
-  // Meta Pixel integration (when pixel ID is provided)
+  // Browser-side: Meta Pixel
   if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('trackCustom', eventName, eventData);
+    const eventId = `${eventName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    window.fbq('track', eventName, eventData, { eventID: eventId });
   }
+  
+  // Server-side: Conversions API
+  sendServerSideEvent(eventName, eventData);
   
   // Google Analytics (if exists)
   if (typeof window !== 'undefined' && window.gtag) {
@@ -150,4 +223,7 @@ export default {
   trackEvent,
   trackCTAClick,
   setupScrollTracking,
+  getFacebookBrowserId,
+  getFacebookClickId,
+  sendServerSideEvent,
 };

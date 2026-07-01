@@ -1,0 +1,37 @@
+{
+  "summary": "Verified Facebook Pixel + Conversions API dual tracking on /lubov-bez-bolka. All 3 backend endpoints return events_received:1 from Facebook. Browser Pixel loads and initializes with correct ID (1326425393018449). CTA click fires both window.fbq and POST /api/facebook/track-event with _fbp cookie and event_id for deduplication.",
+  "tested_scope": ["backend", "frontend", "integration"],
+  "passed": [
+    "POST /api/facebook/track-page-view -> 200, Facebook events_received:1, fbtrace_id returned",
+    "POST /api/facebook/track-cta-click -> 200, event:Lead, events_received:1",
+    "POST /api/facebook/track-event -> 200, events_received:1 for custom events",
+    "Meta Pixel script (fbevents.js) loads on page; window.fbq is a function with loaded=true, version 2.9.347",
+    "Console: 'Meta Pixel initialized: 1326425393018449' logged on page mount",
+    "Signals config request to connect.facebook.net/signals/config/1326425393018449 succeeds",
+    "CTA click ('Искам достъп') dispatches BOTH window.fbq('track','checkout_cta_click',...) AND POST /api/facebook/track-event",
+    "Server-side payload includes fbp cookie (fb.1.<ts>.<id>) extracted from document.cookie and event_id for Pixel/CAPI deduplication",
+    "Console shows '✅ Server-side event sent: checkout_cta_click' confirming dual-track success",
+    "Backend correctly captures client IP and User-Agent from request (per facebook_tracking.py)"
+  ],
+  "failed": [
+    {
+      "area": "frontend / pixel init",
+      "issue": "Facebook warns 'Duplicate Pixel ID: 1326425393018449' – Pixel initialized twice due to React StrictMode double-invoking useEffect in dev.",
+      "evidence": "Browser console: 'warning: [Meta Pixel] - Duplicate Pixel ID: 1326425393018449.' and 'Meta Pixel initialized' logged twice.",
+      "priority": "LOW"
+    },
+    {
+      "area": "frontend / event naming",
+      "issue": "Custom event 'checkout_cta_click' is sent via fbq('track', ...) instead of fbq('trackCustom', ...). Facebook logs warning that non-standard events should use trackCustom.",
+      "evidence": "Console: '[Meta Pixel] - You are sending a non-standard event checkout_cta_click. The preferred way ... is using trackCustom.'",
+      "priority": "LOW"
+    }
+  ],
+  "action_items": [
+    "(Optional) Guard Pixel init with a module-level flag or check window.fbq before re-initializing to eliminate 'Duplicate Pixel ID' warning under StrictMode.",
+    "(Optional) In utils/tracking.js trackEvent, use window.fbq('trackCustom', eventName, ...) for non-standard events like 'checkout_cta_click' and reserve 'track' for standard events (PageView, Lead, ViewContent, Purchase, etc.)."
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "retest_needed": false,
+  "full_testing_deferred": true
+}

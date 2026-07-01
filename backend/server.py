@@ -85,6 +85,10 @@ app.include_router(calendly_router)
 from routes.admin import router as admin_router
 app.include_router(admin_router)
 
+# Import and include Facebook tracking routes
+from routes.facebook_tracking import router as facebook_router
+app.include_router(facebook_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
