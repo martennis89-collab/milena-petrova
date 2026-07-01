@@ -158,10 +158,21 @@ export const sendServerSideEvent = async (eventName, eventData = {}) => {
 export const trackEvent = (eventName, eventData = {}) => {
   console.log('[Track Event]', eventName, eventData);
   
+  // Standard Facebook events (use 'track')
+  const standardEvents = ['PageView', 'ViewContent', 'Search', 'AddToCart', 'AddToWishlist', 
+                          'InitiateCheckout', 'AddPaymentInfo', 'Purchase', 'Lead', 'CompleteRegistration'];
+  
   // Browser-side: Meta Pixel
   if (typeof window !== 'undefined' && window.fbq) {
     const eventId = `${eventName}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    window.fbq('track', eventName, eventData, { eventID: eventId });
+    
+    if (standardEvents.includes(eventName)) {
+      // Use 'track' for standard events
+      window.fbq('track', eventName, eventData, { eventID: eventId });
+    } else {
+      // Use 'trackCustom' for custom events
+      window.fbq('trackCustom', eventName, eventData, { eventID: eventId });
+    }
   }
   
   // Server-side: Conversions API

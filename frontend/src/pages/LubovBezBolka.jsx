@@ -49,8 +49,8 @@ const LubovBezBolka = () => {
     setTimeout(hideEmergentBadge, 500);
     setTimeout(hideEmergentBadge, 2000);
     
-    // Meta Pixel initialization
-    if (LUBOV_BEZ_BOLKA_CONFIG.META_PIXEL_ID && typeof window !== 'undefined') {
+    // Meta Pixel initialization (only once)
+    if (LUBOV_BEZ_BOLKA_CONFIG.META_PIXEL_ID && typeof window !== 'undefined' && !window.fbq) {
       // Initialize Facebook Pixel
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
