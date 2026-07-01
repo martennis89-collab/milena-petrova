@@ -26,7 +26,7 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
   MILENA_PHOTO: 'https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg',
   
   // Analytics
-  META_PIXEL_ID: null, // Will be provided later
+  META_PIXEL_ID: '1326425393018449',
   
   // Tracking events
   EVENTS: {
