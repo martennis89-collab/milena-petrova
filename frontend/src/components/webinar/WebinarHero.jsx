@@ -5,7 +5,17 @@ import { FaFire, FaUsers, FaCheckCircle } from 'react-icons/fa';
 
 const WebinarHero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-[#FFF5F7] via-[#FFE8ED] to-[#FFD4DC] overflow-hidden">
+    <>
+      {/* Date Banner - Sticky top */}
+      <div className="bg-gradient-to-r from-[#D4758C] to-[#B85C7A] text-white py-3 text-center sticky top-0 z-50 shadow-lg">
+        <div className="container mx-auto px-4">
+          <p className="text-sm sm:text-base font-bold">
+            📅 <span className="text-yellow-200">16 ЮЛИ 2026 • 20:00ч</span> • Безплатен уебинар • Само 11 места!
+          </p>
+        </div>
+      </div>
+      
+      <section className="relative bg-gradient-to-br from-[#FFF5F7] via-[#FFE8ED] to-[#FFD4DC] overflow-hidden">
       {/* Decorative floral elements */}
       <div className="absolute top-0 left-0 w-64 h-64 opacity-10">
         <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-rose-300 rounded-full blur-3xl"></div>
@@ -70,21 +80,27 @@ const WebinarHero = () => {
             </div>
           </div>
 
-          {/* Event details with gold/rose accents */}
-          <div className="flex flex-wrap justify-center items-center gap-6 text-[#7A5662] text-sm mt-8 bg-white/50 backdrop-blur-sm rounded-2xl p-4 max-w-3xl mx-auto border border-[#D4758C]/20">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">📅</span>
-              <span className="font-semibold">16 Юли 2026 • 20:00ч</span>
+          {/* Event details - MORE PROMINENT DATE */}
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto border-2 border-[#D4758C]/40 shadow-xl mt-8">
+            <div className="text-center mb-4">
+              <p className="text-xs uppercase tracking-wider text-[#D4758C] font-bold mb-2">Дата и час</p>
+              <p style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#B85C7A] to-[#D4758C] bg-clip-text text-transparent">
+                16 Юли 2026
+              </p>
+              <p className="text-2xl font-bold text-[#7A5662] mt-2">20:00ч</p>
             </div>
-            <div className="h-4 w-px bg-[#D4758C]/30"></div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">💻</span>
-              <span className="font-semibold">Google Meet</span>
-            </div>
-            <div className="h-4 w-px bg-[#D4758C]/30"></div>
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🎁</span>
-              <span className="font-bold text-lg bg-gradient-to-r from-[#D4758C] to-[#B85C7A] bg-clip-text text-transparent">БЕЗПЛАТНО</span>
+            
+            <div className="h-px bg-gradient-to-r from-transparent via-[#D4758C] to-transparent my-4"></div>
+            
+            <div className="flex flex-wrap justify-center items-center gap-6 text-[#7A5662] text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💻</span>
+                <span className="font-semibold">Google Meet</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🎁</span>
+                <span className="font-bold text-lg bg-gradient-to-r from-[#D4758C] to-[#B85C7A] bg-clip-text text-transparent">БЕЗПЛАТНО</span>
+              </div>
             </div>
           </div>
           
@@ -119,6 +135,7 @@ const WebinarHero = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
