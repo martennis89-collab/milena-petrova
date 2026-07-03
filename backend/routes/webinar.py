@@ -129,17 +129,12 @@ async def register_for_webinar(registration: WebinarRegistration):
     </html>
     """
     
-    try:
-        await send_email(
-            to_email=registration.email,
-            subject="✅ Потвърждение за уебинар: Защо попадаме в отношения които ни нараняват",
-            html_content=email_html
-        )
-        
-        email_sent = True
-    except Exception as e:
-        print(f"Error sending email: {e}")
-        email_sent = False
+    # Send confirmation email and check return value
+    email_sent = await send_email(
+        to_email=registration.email,
+        subject="✅ Потвърждение за уебинар: Защо попадаме в отношения които ни нараняват",
+        html_content=email_html
+    )
     
     return {
         "success": True,

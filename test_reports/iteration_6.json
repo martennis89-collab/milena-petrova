@@ -1,0 +1,16 @@
+{
+  "summary": "Retested webinar registration bug fix: email_sent now accurately reflects Resend outcome. Sent request with random email; response returned success:true and email_sent:false. Backend logs show detailed Resend 403 with domain verification message. Registration is persisted in DB regardless of email failure.",
+  "tested_scope": ["backend", "integration"],
+  "passed": [
+    "POST /api/webinar/register with unverified email returned email_sent:false (was previously always true)",
+    "Registration still succeeds with success:true and registration_id despite email failure",
+    "Backend logs show Resend 403 validation_error with 'verify a domain at resend.com/domains' message and full response body",
+    "Registration record persisted in MongoDB (verified via GET /api/webinar/registrations, id matched)",
+    "Response contract correct: {success, message, email_sent:false, registration_id}"
+  ],
+  "failed": [],
+  "action_items": [],
+  "success_rate": {"backend": "100%", "frontend": "N/A (skipped per request)"},
+  "retest_needed": false,
+  "full_testing_deferred": true
+}
