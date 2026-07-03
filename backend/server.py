@@ -108,6 +108,17 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Initialize webinar reminder scheduler
+from utils.webinar_scheduler import start_scheduler, shutdown_scheduler
+
+@app.on_event("startup")
+async def startup_scheduler():
+    """Start the webinar reminder scheduler on application startup"""
+    start_scheduler()
+    logger.info("Webinar reminder scheduler initialized")
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+    shutdown_scheduler()
+    logger.info("Application shutdown complete")

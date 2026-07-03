@@ -9,6 +9,7 @@ import os
 from datetime import datetime, timezone
 import uuid
 from utils.resend_email import send_email
+from utils.webinar_scheduler import schedule_webinar_reminders
 
 router = APIRouter(prefix="/api/webinar", tags=["webinar"])
 
@@ -190,6 +191,13 @@ async def register_for_webinar(registration: WebinarRegistration):
         print(f"✅ Admin notification sent for registration: {registration.name}")
     else:
         print(f"⚠️ Failed to send admin notification for registration: {registration.name}")
+    
+    # Schedule reminder emails
+    try:
+        schedule_webinar_reminders(registration.name, registration.email)
+        print(f"📅 Reminder emails scheduled for {registration.email}")
+    except Exception as e:
+        print(f"⚠️ Failed to schedule reminders for {registration.email}: {str(e)}")
     
     return {
         "success": True,
