@@ -136,6 +136,61 @@ async def register_for_webinar(registration: WebinarRegistration):
         html_content=email_html
     )
     
+    # Send admin notification to omba.mp@gmail.com
+    admin_notification_html = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #2C3E50; }}
+            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+            .header {{ background: #2C3E50; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }}
+            .content {{ background: #ffffff; padding: 30px; border: 1px solid #E5E7EB; }}
+            .info-box {{ background: #F5F1EB; padding: 15px; border-radius: 8px; margin: 15px 0; }}
+            .label {{ font-weight: bold; color: #2C3E50; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1 style="margin: 0;">🔔 Нова регистрация за уебинар!</h1>
+            </div>
+            
+            <div class="content">
+                <p>Нов участник се регистрира за уебинара "Защо попадаме в отношения които ни нараняват"</p>
+                
+                <div class="info-box">
+                    <p><span class="label">👤 Име:</span> {registration.name}</p>
+                    <p><span class="label">📧 Имейл:</span> {registration.email}</p>
+                    <p><span class="label">📱 Телефон:</span> {registration.phone}</p>
+                    <p><span class="label">🕐 Регистриран на:</span> {datetime.now(timezone.utc).strftime('%d.%m.%Y в %H:%M:%S')}</p>
+                </div>
+                
+                <p><strong>Статус на потвърдителен имейл:</strong> {"✅ Изпратен" if email_sent else "❌ Неуспешен (domain не е верифициран)"}</p>
+                
+                <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #E5E7EB; color: #8C7A6B; font-size: 14px;">
+                    Можете да видите всички регистрации в admin dashboard: <br>
+                    <a href="https://milenapetrova.bg/admin/webinar">https://milenapetrova.bg/admin/webinar</a>
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    # Send admin notification (will work even without domain verification since it's to omba.mp@gmail.com)
+    admin_email_sent = await send_email(
+        to_email="omba.mp@gmail.com",
+        subject=f"🔔 Нова регистрация: {registration.name}",
+        html_content=admin_notification_html
+    )
+    
+    if admin_email_sent:
+        print(f"✅ Admin notification sent for registration: {registration.name}")
+    else:
+        print(f"⚠️ Failed to send admin notification for registration: {registration.name}")
+    
     return {
         "success": True,
         "message": "Успешна регистрация! Проверете имейла си за детайли.",

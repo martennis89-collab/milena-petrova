@@ -1,0 +1,27 @@
+{
+  "summary": "Backend-only test of POST /api/webinar/register admin notification feature. Registered a random test user; verified user confirmation email fails with 403 (expected, unverified domain) while admin notification to omba.mp@gmail.com succeeds with 200 OK. Backend log printed the expected 'Admin notification sent for registration: <name>' message. Registration itself succeeded (200) despite user email failure.",
+  "tested_scope": ["backend", "integration"],
+  "passed": [
+    "POST /api/webinar/register returns 200 with success:true and email_sent:false for unverified recipient",
+    "Two send_email calls made: one to user (403) and one to omba.mp@gmail.com (200, id=c0f7f96d-aba8-4af6-8344-ab22794f1722)",
+    "Log line '✅ Admin notification sent for registration: Test User 95bbfd4f' printed as required",
+    "Admin email subject uses registrant name pattern '🔔 Нова регистрация: <name>' (per code)",
+    "Admin HTML body includes name, email, phone, timestamp and confirmation email status field (per code review)",
+    "Registration flow does not abort when user email fails; still persists registration and returns success"
+  ],
+  "failed": [],
+  "action_items": [],
+  "success_rate": {"backend": "100%", "frontend": "n/a"},
+  "retest_needed": false,
+  "full_testing_deferred": true,
+  "evidence": {
+    "http_status": 200,
+    "response_body": {"success": true, "email_sent": false, "registration_id": "fe322e06-fa16-4e61-840a-3acbab455a60"},
+    "admin_resend_id": "c0f7f96d-aba8-4af6-8344-ab22794f1722",
+    "log_snippets": [
+      "❌ HTTP Error sending email to test95bbfd4f@example.com  Status: 403",
+      "✅ Email sent successfully to omba.mp@gmail.com: c0f7f96d-aba8-4af6-8344-ab22794f1722",
+      "✅ Admin notification sent for registration: Test User 95bbfd4f"
+    ]
+  }
+}
