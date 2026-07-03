@@ -31,9 +31,9 @@ const CountdownTimer = ({ targetDate }) => {
   }, [targetDate]);
 
   const TimeBlock = ({ value, label }) => (
-    <div className="bg-[#F5F1EB] rounded-lg p-3 text-center min-w-[70px]">
-      <div className="text-3xl font-bold text-[#2C3E50]">{String(value).padStart(2, '0')}</div>
-      <div className="text-xs text-[#8C7A6B] font-medium uppercase mt-1">{label}</div>
+    <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 text-center min-w-[70px]">
+      <div className="text-3xl font-bold text-white">{String(value).padStart(2, '0')}</div>
+      <div className="text-xs text-white/70 font-medium uppercase mt-1">{label}</div>
     </div>
   );
 

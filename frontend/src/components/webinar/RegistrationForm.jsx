@@ -51,7 +51,7 @@ const RegistrationForm = () => {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-2xl shadow-xl p-8 text-center space-y-6">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 text-center space-y-6">
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto">
           <FaCheckCircle className="w-10 h-10 text-green-600" />
         </div>
@@ -80,13 +80,13 @@ const RegistrationForm = () => {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="bg-white rounded-2xl shadow-2xl p-8">
       <div className="mb-6 text-center">
         <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-2xl text-[#2C3E50] font-semibold mb-2">
           Запази своето безплатно място
         </h3>
         <p className="text-sm text-[#8C7A6B]">
-          Попълнете формата и получете линка за уебинара на имейла си
+          Попълнете формата и получете линка на имейла си
         </p>
       </div>
 

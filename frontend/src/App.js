@@ -12,6 +12,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import LubovBezBolka from "./pages/LubovBezBolka";
 import Webinar from "./pages/Webinar";
+import WebinarDashboard from "./pages/WebinarDashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/session" element={<DirectBooking />} />
           <Route path="/lubov-bez-bolka" element={<LubovBezBolka />} />
           <Route path="/webinar" element={<Webinar />} />
+          <Route path="/admin/webinar" element={<WebinarDashboard />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/payment/cancel" element={<PaymentCancel />} />

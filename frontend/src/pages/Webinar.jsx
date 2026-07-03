@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import WebinarHero from '../components/webinar/WebinarHero';
+import QuickBenefits from '../components/webinar/QuickBenefits';
 import WebinarTakeaways from '../components/webinar/WebinarTakeaways';
 import TransformationSection from '../components/webinar/TransformationSection';
 import AboutHost from '../components/webinar/AboutHost';
@@ -22,6 +23,7 @@ const Webinar = () => {
       </Helmet>
       
       <WebinarHero />
+      <QuickBenefits />
       <WebinarTakeaways />
       <TransformationSection />
       <AboutHost />

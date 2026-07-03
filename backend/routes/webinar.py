@@ -166,3 +166,19 @@ async def get_webinar_stats():
         "spots_remaining": spots_remaining,
         "actual_registrations": total_registrations
     }
+
+
+@router.get("/registrations")
+async def get_all_registrations():
+    """Get all webinar registrations for admin dashboard"""
+    
+    registrations = await db.webinar_registrations.find(
+        {},
+        {"_id": 0}
+    ).sort("registered_at", -1).to_list(1000)
+    
+    return {
+        "success": True,
+        "total": len(registrations),
+        "registrations": registrations
+    }
