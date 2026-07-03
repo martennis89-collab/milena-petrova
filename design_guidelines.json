@@ -1,0 +1,96 @@
+{
+  "theme": "light",
+  "archetype": "1 (Organic & Earthy)",
+  "vibe": "Emotional, warm, feminine, hope, transformation, empathetic",
+  "typography": {
+    "fonts": {
+      "headings": "Playfair Display, serif",
+      "body": "Manrope, sans-serif"
+    },
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#2C3E50] font-serif leading-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight text-[#2C3E50] font-serif leading-snug",
+      "h3": "text-xl sm:text-2xl text-[#2C3E50] font-serif",
+      "body": "text-base text-[#4A4A4A] leading-relaxed",
+      "labels": "text-xs font-bold uppercase tracking-[0.2em] text-[#8C7A6B]",
+      "small": "text-sm text-[#8C7A6B] leading-relaxed"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#FFFFFF",
+      "secondary": "#F5F1EB",
+      "accent_warm": "#BFAE9F",
+      "accent_dark": "#8C7A6B"
+    },
+    "text": {
+      "primary": "#2C3E50",
+      "secondary": "#4A4A4A",
+      "muted": "#8C7A6B",
+      "inverse": "#FFFFFF",
+      "error": "#E53E3E"
+    },
+    "interactive": {
+      "cta_background": "#2C3E50",
+      "cta_hover": "#34495E",
+      "cta_text": "#FFFFFF",
+      "input_border": "#E5E7EB",
+      "input_bg": "#FFFFFF",
+      "input_focus": "#8C7A6B",
+      "progress_bar_bg": "#E5E7EB",
+      "progress_bar_fill": "linear-gradient(to right, #8C7A6B, #BFAE9F)"
+    }
+  },
+  "layout_and_spacing": {
+    "container": "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-16 md:py-24",
+    "border_radius": "rounded-2xl",
+    "shadows": {
+      "soft": "shadow-sm",
+      "card": "shadow-md hover:shadow-lg transition-shadow duration-300",
+      "elevated": "shadow-xl"
+    }
+  },
+  "components": {
+    "hero_section": {
+      "structure": "Split layout. Left side: Webinar details, emotional hook, value proposition, urgency elements. Right side: Registration form in an elevated card over a subtle gradient/blob background.",
+      "background": "bg-gradient-to-b from-[#F5F1EB] to-white with subtle blurred circular blobs in #8C7A6B and #BFAE9F (opacity-5)."
+    },
+    "registration_form": {
+      "structure": "White card, rounded-2xl, shadow-xl, p-8. Fields: Name, Email, Phone (using customized Shadcn Input). Submit button taking full width.",
+      "thank_you_state": "Replace form on successful submission. Show a green checkmark, warm thank you message, and a reminder to check email."
+    },
+    "urgency_elements": {
+      "countdown_timer": "Flex row of 4 boxes (Days, Hours, Minutes, Seconds) with text-[#2C3E50] and bg-[#F5F1EB] rounded-lg p-3 text-center.",
+      "spots_remaining": "Progress bar showing 39/50 filled (11 left). Text: 'Остават само 11 от 50 места'. Use the progress_bar_fill gradient."
+    },
+    "takeaways_section": {
+      "structure": "Bento grid (md:grid-cols-2 lg:grid-cols-3) with generous gaps (gap-8). Cards have bg-[#F5F1EB], p-8, rounded-2xl. Use Lucide icons (text-[#8C7A6B]) for visual interest."
+    },
+    "about_host_section": {
+      "structure": "Image left, text right. Image uses rounded-3xl with a subtle offset background blob. Text explains why Milena is the right guide."
+    }
+  },
+  "motion_and_interaction": {
+    "buttons": "Transform hover:-translate-y-0.5 transition-all duration-200. Focus rings should use focus:ring-2 focus:ring-offset-2 focus:ring-[#2C3E50].",
+    "cards": "Subtle shadow increase on hover.",
+    "entrance": "Fade in and slide up (using framer-motion if available, or tailwind classes) for sections."
+  },
+  "images": {
+    "host_photo": {
+      "url": "https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg",
+      "alt": "Милена Петрова",
+      "usage": "Use this photo for the About the Host section and optionally in the hero if it fits."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build the landing page at `/webinar` using pure HTML/Tailwind for layout and heavily customized Shadcn components for the form.",
+    "Add Playfair Display and Manrope to the project's font setup (e.g., via Google Fonts in index.html).",
+    "Implement the form with state management to toggle between the form and the Thank You message after submission.",
+    "Create a functional countdown timer pointing to Thursday, July 16, 2025, 20:00 (Bulgarian Time).",
+    "Include a progress bar for the limited spots (11 out of 50 remaining).",
+    "Ensure all interactive elements and key information blocks have `data-testid` attributes.",
+    "Follow the color palette exactly to match the milenapetrova.bg brand.",
+    "Keep the tone empathetic and warm. The CTA should say 'Запази своето безплатно място' (Save your free spot)."
+  ]
+}
