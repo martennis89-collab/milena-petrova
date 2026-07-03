@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from '../ui/input';
-import { FaCheckCircle, FaSpinner } from 'react-icons/fa';
+import { FaCheckCircle, FaSpinner, FaCalendarPlus, FaApple } from 'react-icons/fa';
+import { SiGooglecalendar } from 'react-icons/si';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,67 @@ const RegistrationForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
+  // Webinar event details
+  const eventDetails = {
+    title: 'Защо попадаме в отношения които ни нараняват с Милена Петрова',
+    description: 'Безплатен уебинар за жени в повтарящи се нездравословни връзки. Научете защо най-важният въпрос не е "Защо той се държи така?", а "Какво ме задържа?"',
+    location: 'https://meet.google.com/ahr-nxxi-dxb',
+    startDate: '20260716T170000Z', // July 16, 2026, 20:00 Sofia time = 17:00 UTC
+    endDate: '20260716T180000Z',   // 21:00 Sofia time = 18:00 UTC
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
     setError('');
+  };
+
+  // Generate Google Calendar URL
+  const getGoogleCalendarUrl = () => {
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: eventDetails.title,
+      details: `${eventDetails.description}\n\nGoogle Meet линк: ${eventDetails.location}`,
+      location: eventDetails.location,
+      dates: `${eventDetails.startDate}/${eventDetails.endDate}`,
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  };
+
+  // Generate .ics file for Apple Calendar
+  const downloadICSFile = () => {
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Milena Petrova//Webinar//BG',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `DTSTART:${eventDetails.startDate}`,
+      `DTEND:${eventDetails.endDate}`,
+      `SUMMARY:${eventDetails.title}`,
+      `DESCRIPTION:${eventDetails.description}\\n\\nGoogle Meet линк: ${eventDetails.location}`,
+      `LOCATION:${eventDetails.location}`,
+      'STATUS:CONFIRMED',
+      'SEQUENCE:0',
+      'BEGIN:VALARM',
+      'TRIGGER:-PT30M',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:Reminder: Webinar starts in 30 minutes',
+      'END:VALARM',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'milena-petrova-webinar.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleSubmit = async (e) => {
@@ -62,6 +118,39 @@ const RegistrationForm = () => {
           </h3>
           <p className="text-[#4A4A4A] leading-relaxed">
             Благодарим ви! Проверете имейла си за детайли и линк за присъединяване към уебинара.
+          </p>
+        </div>
+
+        {/* Calendar Buttons */}
+        <div className="bg-gradient-to-br from-[#FFF5F7] to-[#FFE8ED] p-6 rounded-xl space-y-4">
+          <p className="text-sm font-semibold text-[#2C3E50] mb-4">
+            📅 Добави събитието в календара си:
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {/* Google Calendar Button */}
+            <a
+              href={getGoogleCalendarUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white hover:bg-[#D4758C] text-[#2C3E50] hover:text-white font-semibold py-3 px-4 rounded-lg border-2 border-[#D4758C] transition-all duration-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+            >
+              <SiGooglecalendar className="w-5 h-5" />
+              <span className="text-sm">Google Calendar</span>
+            </a>
+
+            {/* Apple Calendar Button */}
+            <button
+              onClick={downloadICSFile}
+              className="flex items-center justify-center gap-2 bg-white hover:bg-[#2C3E50] text-[#2C3E50] hover:text-white font-semibold py-3 px-4 rounded-lg border-2 border-[#2C3E50] transition-all duration-200 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+            >
+              <FaApple className="w-5 h-5" />
+              <span className="text-sm">Apple Calendar</span>
+            </button>
+          </div>
+
+          <p className="text-xs text-[#8C7A6B] mt-3">
+            16 Юли 2026 • 20:00 - 21:00ч (София време)
           </p>
         </div>
 
