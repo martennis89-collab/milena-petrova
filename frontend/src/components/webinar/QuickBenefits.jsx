@@ -26,21 +26,25 @@ const QuickBenefits = () => {
   ];
 
   return (
-    <section className="py-12 bg-white">
-      <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 bg-gradient-to-b from-white to-[#FFF5F7] relative overflow-hidden">
+      {/* Decorative floral accent */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFD4DC] rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#E89AAC] rounded-full blur-3xl opacity-20"></div>
+      
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((benefit, index) => (
             <div 
               key={index}
-              className="text-center p-6 rounded-xl bg-gradient-to-br from-[#F5F1EB] to-[#E5D5C5] hover:shadow-lg transition-shadow duration-300"
+              className="text-center p-6 rounded-2xl bg-white border-2 border-[#D4758C]/20 hover:shadow-xl hover:border-[#D4758C]/40 transition-all duration-300"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full text-[#8C7A6B] mb-4 shadow-sm">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#D4758C] to-[#B85C7A] rounded-full text-white mb-4 shadow-lg">
                 {benefit.icon}
               </div>
-              <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-lg text-[#2C3E50] font-semibold mb-2">
+              <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-lg text-[#7A5662] font-bold mb-2">
                 {benefit.title}
               </h3>
-              <p className="text-sm text-[#4A4A4A] leading-relaxed">
+              <p className="text-sm text-[#9B7680] leading-relaxed">
                 {benefit.description}
               </p>
             </div>
