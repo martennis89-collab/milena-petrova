@@ -26,6 +26,25 @@ const WebinarHero = () => {
               Защо попадаме в отношения, които ни нараняват?
             </h1>
             
+            {/* Target audience - Who is this for */}
+            <div className="bg-white p-6 rounded-xl border-l-4 border-[#8C7A6B] shadow-sm">
+              <p className="text-sm font-semibold text-[#8C7A6B] mb-3 uppercase tracking-wide">Този уебинар е за теб, ако:</p>
+              <ul className="space-y-2 text-[#2C3E50]">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#8C7A6B] font-bold mt-0.5">✓</span>
+                  <span>Постоянно попадаш в отношения, които те нараняват, но не знаеш защо</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#8C7A6B] font-bold mt-0.5">✓</span>
+                  <span>Чувстваш се заседнала в един и същ болезнен модел във връзките си</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#8C7A6B] font-bold mt-0.5">✓</span>
+                  <span>Готова си да разбереш какво те задържа и как да направиш промяна</span>
+                </li>
+              </ul>
+            </div>
+            
             {/* Subheadline */}
             <p className="text-lg sm:text-xl text-[#4A4A4A] leading-relaxed">
               Понякога най-важният въпрос не е:<br/>
