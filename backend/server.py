@@ -89,6 +89,10 @@ app.include_router(admin_router)
 from routes.facebook_tracking import router as facebook_router
 app.include_router(facebook_router)
 
+# Import and include Webinar routes
+from routes.webinar import router as webinar_router
+app.include_router(webinar_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
