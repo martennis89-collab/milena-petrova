@@ -10,7 +10,7 @@ const WebinarHero = () => {
       <div className="bg-gradient-to-r from-[#D4758C] to-[#B85C7A] text-white py-3 text-center sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto px-4">
           <p className="text-sm sm:text-base font-bold">
-            📅 <span className="text-yellow-200">16 ЮЛИ 2026 • 20:00ч</span> • Безплатен уебинар • Само 11 места!
+            💝 Безплатен уебинар за жени в повтарящи се нездравословни връзки • <span className="text-yellow-200">16 ЮЛИ 2026, 20:00ч</span>
           </p>
         </div>
       </div>
