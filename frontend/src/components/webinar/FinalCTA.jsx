@@ -38,7 +38,7 @@ const FinalCTA = () => {
         </div>
 
         <p className="text-sm text-[#8C7A6B]">
-          16 Юли 2025, 20:00ч • Google Meet • Безплатно
+          16 Юли 2026, 20:00ч • Google Meet • Безплатно
         </p>
       </div>
     </section>

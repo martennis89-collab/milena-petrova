@@ -90,7 +90,7 @@ async def register_for_webinar(registration: WebinarRegistration):
                     <p><strong>Тема:</strong><br>
                     Защо попадаме в отношения които ни нараняват</p>
                     
-                    <p><strong>Дата:</strong> Четвъртък, 16 Юли 2025</p>
+                    <p><strong>Дата:</strong> Четвъртък, 16 Юли 2026</p>
                     <p><strong>Час:</strong> 20:00 - 21:00 (Българско време)</p>
                     <p><strong>Платформа:</strong> Google Meet</p>
                     
