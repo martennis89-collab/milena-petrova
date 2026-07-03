@@ -41,12 +41,22 @@ async def send_email(to_email: str, subject: str, html_content: str, from_email:
     
     try:
         response = requests.post(url, json=payload, headers=headers, timeout=10)
+        
+        # Log full response for debugging
+        print(f"📧 Resend API Response Status: {response.status_code}")
+        print(f"📧 Resend API Response: {response.text}")
+        
         response.raise_for_status()
         
         result = response.json()
-        print(f"✅ Email sent to {to_email}: {result.get('id')}")
+        print(f"✅ Email sent successfully to {to_email}: {result.get('id')}")
         return True
         
+    except requests.exceptions.HTTPError as e:
+        print(f"❌ HTTP Error sending email to {to_email}")
+        print(f"   Status: {e.response.status_code}")
+        print(f"   Response: {e.response.text}")
+        return False
     except requests.exceptions.RequestException as e:
-        print(f"❌ Error sending email to {to_email}: {str(e)}")
+        print(f"❌ Request Error sending email to {to_email}: {str(e)}")
         return False

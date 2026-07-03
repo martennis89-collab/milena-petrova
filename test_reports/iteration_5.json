@@ -1,0 +1,26 @@
+{
+  "summary": "Tested POST /api/webinar/register with a random unverified email (test1783113585@example.com). Registration succeeds and is saved to DB. Detailed Resend 403 error is logged correctly with full domain-verification message. BUG: response returns email_sent:true even though the Resend call actually fails with 403.",
+  "tested_scope": ["backend", "integration"],
+  "passed": [
+    "POST /api/webinar/register returns 200 with success:true",
+    "Registration record is persisted in MongoDB (verified via /api/webinar/registrations)",
+    "Backend logs '📧 Resend API Response Status: 403' as required",
+    "Backend logs the full Resend validation_error message including 'verify a domain at resend.com/domains' and 'omba.mp@gmail.com'",
+    "GET /api/webinar/registrations returns 200 and lists the new registration"
+  ],
+  "failed": [
+    {
+      "area": "POST /api/webinar/register response contract",
+      "issue": "Response returns email_sent:true when the Resend API actually returned 403 and the email was NOT sent. Feature spec requires email_sent:false on failure.",
+      "evidence": "curl response: {\"success\":true,...,\"email_sent\":true,\"registration_id\":\"d4019023-...\"}  |  Backend log for same request: '📧 Resend API Response Status: 403' + '❌ HTTP Error sending email to test1783113585@example.com'. Root cause: utils/resend_email.py catches HTTPError and returns False (no raise), but routes/webinar.py uses try/except and only sets email_sent=False on exception — it never checks the boolean return value.",
+      "priority": "HIGH"
+    }
+  ],
+  "action_items": [
+    "Fix routes/webinar.py to use the return value of send_email(): e.g. `email_sent = await send_email(...)` (remove the try/except around it, or additionally check the boolean). Currently send_email swallows the HTTPError and returns False, so email_sent is always True.",
+    "Optional: log the same '📧 Resend API Response Status' block for 2xx responses too (currently only visible in error path via HTTPError handler; the pre-raise print does log it, so this is already OK — no change needed)."
+  ],
+  "success_rate": {"backend": "80%", "frontend": "n/a (skipped per request)"},
+  "retest_needed": true,
+  "full_testing_deferred": true
+}
