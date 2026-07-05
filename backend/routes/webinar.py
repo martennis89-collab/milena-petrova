@@ -2,7 +2,7 @@
 Webinar registration endpoint
 """
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, EmailStr, Field
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import uuid
 from utils.resend_email import send_email
 from utils.webinar_scheduler import schedule_webinar_reminders
+from utils.facebook_conversions import fb_conversions
 
 router = APIRouter(prefix="/api/webinar", tags=["webinar"])
 
@@ -27,7 +28,7 @@ class WebinarRegistration(BaseModel):
 
 
 @router.post("/register")
-async def register_for_webinar(registration: WebinarRegistration):
+async def register_for_webinar(registration: WebinarRegistration, request: Request):
     """
     Register a participant for the webinar
     """
@@ -198,6 +199,34 @@ async def register_for_webinar(registration: WebinarRegistration):
         print(f"📅 Reminder emails scheduled for {registration.email}")
     except Exception as e:
         print(f"⚠️ Failed to schedule reminders for {registration.email}: {str(e)}")
+    
+    # Send Facebook Conversions API Lead event
+    try:
+        # Get client IP and user agent
+        client_ip = request.client.host if request.client else None
+        user_agent = request.headers.get('user-agent', '')
+        
+        # Send server-side event
+        fb_conversions.send_event(
+            event_name='Lead',
+            event_source_url=request.headers.get('referer', 'https://milenapetrova.bg/webinar'),
+            user_data={
+                'email': registration.email,
+                'client_ip_address': client_ip,
+                'client_user_agent': user_agent
+            },
+            custom_data={
+                'content_name': 'Webinar Registration',
+                'content_category': 'Webinar',
+                'value': 0.00,
+                'currency': 'BGN',
+                'predicted_ltv': 150.00,
+                'status': 'completed'
+            }
+        )
+        print(f"✅ Facebook Lead event sent for {registration.email}")
+    except Exception as e:
+        print(f"⚠️ Failed to send Facebook event: {str(e)}")
     
     return {
         "success": True,

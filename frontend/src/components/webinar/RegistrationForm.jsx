@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { FaCheckCircle, FaSpinner, FaCalendarPlus, FaApple } from 'react-icons/fa';
 import { SiGooglecalendar } from 'react-icons/si';
+import { trackEvent } from '../../utils/tracking';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -95,6 +96,18 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         setSubmitted(true);
+        
+        // Track Facebook Pixel Lead event
+        trackEvent('Lead', {
+          content_name: 'Webinar Registration',
+          content_category: 'Webinar',
+          value: 0.00,
+          currency: 'BGN',
+          predicted_ltv: 150.00,
+          status: 'completed'
+        });
+        
+        console.log('✅ Facebook Lead event tracked for webinar registration');
       } else {
         setError(data.detail || 'Възникна грешка. Моля опитайте отново.');
       }
