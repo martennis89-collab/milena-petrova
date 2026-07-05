@@ -4,24 +4,24 @@ import { FaHeart, FaCompass, FaLightbulb, FaUnlock } from 'react-icons/fa';
 const WebinarTakeaways = () => {
   const takeaways = [
     {
-      icon: <FaHeart className="w-8 h-8 text-[#8C7A6B]" />,
+      icon: <FaHeart className="w-8 h-8 text-[#D4758C]" />,
       title: "Невидимите модели",
-      description: "Разберете защо се връщате към едни и същи болезнени избори във връзките си, дори когато знаете, че не са добри за вас."
+      description: "Ще разбереш защо се връщаш към едни и същи болезнени избори във връзките си, дори когато знаеш, че не са добри за теб."
     },
     {
-      icon: <FaCompass className="w-8 h-8 text-[#8C7A6B]" />,
+      icon: <FaCompass className="w-8 h-8 text-[#D4758C]" />,
       title: "Правилният въпрос",
-      description: "Научете защо въпросът не е 'Защо той се държи така?', а 'Какво ме задържа тук?' и как това променя всичко."
+      description: "Ще видиш защо въпросът не е само 'Защо той се държи така?', а 'Какво ме задържа тук?'"
     },
     {
-      icon: <FaLightbulb className="w-8 h-8 text-[#8C7A6B]" />,
+      icon: <FaLightbulb className="w-8 h-8 text-[#D4758C]" />,
       title: "Моментът на промяна",
-      description: "Открийте точния момент, в който започва истинската промяна - и как да го разпознаете."
+      description: "Ще откриеш кога започва истинската промяна и как да разпознаеш първата стъпка."
     },
     {
-      icon: <FaUnlock className="w-8 h-8 text-[#8C7A6B]" />,
+      icon: <FaUnlock className="w-8 h-8 text-[#D4758C]" />,
       title: "Пътят напред",
-      description: "Получете практични стъпки за излизане от цикъла на болезнените отношения и намиране на любов, която ви заслужавате."
+      description: "Ще получиш практични насоки за излизане от болезнения цикъл и изграждане на по-здрави отношения."
     }
   ];
 

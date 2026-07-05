@@ -99,6 +99,15 @@
             </p>
         </a>
         <script>
+            // Hide badge on webinar page for professional look
+            if (window.location.pathname === '/webinar') {
+                const badge = document.getElementById('emergent-badge');
+                if (badge) {
+                    badge.style.display = 'none';
+                }
+            }
+        </script>
+        <script>
             !(function (t, e) {
                 var o, n, p, r;
                 e.__SV ||

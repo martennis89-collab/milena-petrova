@@ -55,62 +55,59 @@ const WebinarHero = () => {
             Как да разпознаеш модела и да започнеш да излизаш от него
           </p>
           
-          {/* Key Benefits - 3 columns with rose theme */}
-          <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-8">
-            <div className="bg-white/60 backdrop-blur-sm border-2 border-[#D4758C]/20 rounded-2xl p-5 text-left shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#D4758C] to-[#B85C7A] rounded-full flex items-center justify-center mb-3 shadow-md">
-                <FaCheckCircle className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-[#7A5662] font-bold mb-2 text-base">Разпознай моделите</h3>
-              <p className="text-[#9B7680] text-sm leading-relaxed">Научи да виждаш болезнените модели преди да се повторят</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm border-2 border-[#D4758C]/20 rounded-2xl p-5 text-left shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#D4758C] to-[#B85C7A] rounded-full flex items-center justify-center mb-3 shadow-md">
-                <FaCheckCircle className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-[#7A5662] font-bold mb-2 text-base">Разбери дълбоката причина</h3>
-              <p className="text-[#9B7680] text-sm leading-relaxed">Открий защо се връщаш към едни и същи избори</p>
-            </div>
-            <div className="bg-white/60 backdrop-blur-sm border-2 border-[#D4758C]/20 rounded-2xl p-5 text-left shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#D4758C] to-[#B85C7A] rounded-full flex items-center justify-center mb-3 shadow-md">
-                <FaCheckCircle className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-[#7A5662] font-bold mb-2 text-base">Започни промяната</h3>
-              <p className="text-[#9B7680] text-sm leading-relaxed">Получи яснота откъде да започнеш трансформацията</p>
-            </div>
-          </div>
+          {/* Audience clarification */}
+          <p className="text-base text-[#9B7680] max-w-3xl mx-auto leading-relaxed mt-4">
+            За жени, които усещат, че повтарят болезнени модели във връзките си и искат яснота откъде започва промяната.
+          </p>
 
           {/* Event details - MORE PROMINENT DATE */}
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 max-w-3xl mx-auto border-2 border-[#D4758C]/40 shadow-xl mt-8">
-            <div className="text-center mb-4">
-              <p className="text-xs uppercase tracking-wider text-[#D4758C] font-bold mb-2">Дата и час</p>
-              <p style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#B85C7A] to-[#D4758C] bg-clip-text text-transparent">
-                16 Юли 2026
-              </p>
-              <p className="text-2xl font-bold text-[#7A5662] mt-2">20:00ч</p>
-            </div>
-            
-            <div className="h-px bg-gradient-to-r from-transparent via-[#D4758C] to-transparent my-4"></div>
-            
-            <div className="flex flex-wrap justify-center items-center gap-6 text-[#7A5662] text-sm">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-[#7A5662] text-sm sm:text-base">
               <div className="flex items-center gap-2">
-                <span className="text-xl">💻</span>
-                <span className="font-semibold">Google Meet</span>
+                <span className="text-2xl">📅</span>
+                <span className="font-bold">16 Юли 2026</span>
               </div>
+              <div className="hidden sm:block h-6 w-px bg-[#D4758C]/30"></div>
               <div className="flex items-center gap-2">
-                <span className="text-xl">🎁</span>
-                <span className="font-bold text-lg bg-gradient-to-r from-[#D4758C] to-[#B85C7A] bg-clip-text text-transparent">БЕЗПЛАТНО</span>
+                <span className="text-2xl">⏰</span>
+                <span className="font-bold">20:00 ч.</span>
+              </div>
+              <div className="hidden sm:block h-6 w-px bg-[#D4758C]/30"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">💻</span>
+                <span className="font-semibold">Онлайн</span>
               </div>
             </div>
+          </div>
+          
+          {/* Primary CTA Button */}
+          <div className="mt-8">
+            <button
+              onClick={() => {
+                const form = document.querySelector('#webinar-form');
+                if (form) {
+                  form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }}
+              className="inline-block bg-gradient-to-r from-[#D4758C] to-[#B85C7A] hover:from-[#B85C7A] hover:to-[#D4758C] text-white font-bold text-lg py-4 px-10 rounded-full transition-all duration-200 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg"
+            >
+              Запази своето безплатно място
+            </button>
           </div>
           
           {/* Registration Form - with rose theme */}
-          <div className="max-w-md mx-auto mt-8">
+          <div id="webinar-form" className="max-w-md mx-auto mt-10">
             <RegistrationForm />
           </div>
           
-          {/* Urgency elements */}
+          {/* Urgency elements - Countdown and scarcity */}
           <div className="max-w-md mx-auto space-y-4 mt-6">
+            {/* Countdown */}
+            <div>
+              <p className="text-sm text-[#9B7680] font-medium mb-3 text-center">⏰ Уебинарът започва след:</p>
+              <CountdownTimer targetDate="2026-07-16T20:00:00+03:00" />
+            </div>
+            
             {/* Spots remaining */}
             <div className="bg-gradient-to-r from-rose-100 to-pink-100 backdrop-blur-sm p-4 rounded-2xl border-l-4 border-[#D4758C] shadow-md">
               <div className="flex items-center gap-2 mb-2">
@@ -124,12 +121,6 @@ const WebinarHero = () => {
                 />
               </div>
               <p className="text-xs text-[#9B7680] mt-2">39 места вече са заети</p>
-            </div>
-            
-            {/* Countdown */}
-            <div>
-              <p className="text-sm text-[#9B7680] font-medium mb-3">⏰ Уебинарът започва след:</p>
-              <CountdownTimer targetDate="2026-07-16T20:00:00+03:00" />
             </div>
           </div>
         </div>

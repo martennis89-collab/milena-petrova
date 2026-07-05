@@ -21,14 +21,14 @@ const AboutHost = () => {
           {/* Content */}
           <div className="space-y-6">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-[#D4758C] mb-3">Вашият водач</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#D4758C] mb-3">Вашият водещ</p>
               <h2 style={{ fontFamily: "'Playfair Display', serif" }} className="text-3xl sm:text-4xl bg-gradient-to-r from-[#B85C7A] to-[#D4758C] bg-clip-text text-transparent mb-4 font-bold">
                 Милена Петрова
               </h2>
             </div>
 
             <p className="text-lg text-[#7A5662] leading-relaxed">
-              Коуч и ментор за лична трансформация, специализирана в работа с жени, които искат да излязат от болезнени отношения и да изградят здрави връзки.
+              Коуч и ментор за лична трансформация, специализирана в работа с жени, които искат да излязат от болезнени отношения и да изградят по-здрави връзки със себе си и с другите.
             </p>
 
             <div className="space-y-4">
@@ -64,7 +64,7 @@ const AboutHost = () => {
             </div>
 
             <blockquote className="border-l-4 border-[#D4758C] pl-6 py-2 italic text-[#7A5662] bg-white/50 rounded-r-lg">
-              "Променихме начина, по който се отнасяме към себе си, променяме и начина, по който другите се отнасят към нас."
+              "Когато променим начина, по който се отнасяме към себе си, започваме да променяме и начина, по който другите се отнасят към нас."
             </blockquote>
           </div>
         </div>
