@@ -108,19 +108,18 @@ const WebinarHero = () => {
               <CountdownTimer targetDate="2026-07-16T20:00:00+03:00" />
             </div>
             
-            {/* Spots remaining */}
-            <div className="bg-gradient-to-r from-rose-100 to-pink-100 backdrop-blur-sm p-4 rounded-2xl border-l-4 border-[#D4758C] shadow-md">
-              <div className="flex items-center gap-2 mb-2">
-                <FaUsers className="text-[#D4758C] w-4 h-4" />
-                <p className="font-bold text-[#7A5662] text-sm">Остават само 11 от 50 места!</p>
+            {/* SOLD OUT - All spots taken */}
+            <div className="bg-gradient-to-r from-rose-100 to-pink-100 backdrop-blur-sm p-6 rounded-2xl border-l-4 border-[#D4758C] shadow-md text-center">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <FaCheckCircle className="text-[#D4758C] w-6 h-6" />
+                <p className="font-bold text-[#2C3E50] text-lg">Всички 60 места са заети!</p>
               </div>
-              <div className="w-full bg-white/50 rounded-full h-3 overflow-hidden shadow-inner">
-                <div 
-                  className="h-full rounded-full bg-gradient-to-r from-[#D4758C] to-[#E89AAC] transition-all duration-500 shadow-sm"
-                  style={{ width: '78%' }}
-                />
-              </div>
-              <p className="text-xs text-[#9B7680] mt-2">39 места вече са заети</p>
+              <p className="text-sm text-[#7A5662] mb-3">
+                Поради изключително високия интерес, регистрациите са затворени.
+              </p>
+              <p className="text-sm text-[#2C3E50] font-semibold">
+                За въпроси: 📞 <a href="tel:+359899577300" className="text-[#D4758C] hover:underline">0899 577 300</a>
+              </p>
             </div>
           </div>
         </div>

@@ -5,6 +5,10 @@ import { SiGooglecalendar } from 'react-icons/si';
 import { trackEvent } from '../../utils/tracking';
 
 const RegistrationForm = () => {
+  // Registration closed flag - set to true when capacity is reached
+  const REGISTRATIONS_CLOSED = true;
+  const CAPACITY_REACHED = 60;
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -176,6 +180,57 @@ const RegistrationForm = () => {
 
         <div className="text-sm text-[#8C7A6B]">
           Очакваме ви на 16 Юли в 20:00ч!
+        </div>
+      </div>
+    );
+  }
+
+  // Show "Capacity Reached" message when registrations are closed
+  if (REGISTRATIONS_CLOSED) {
+    return (
+      <div className="bg-white rounded-2xl shadow-2xl p-8 text-center space-y-6">
+        <div className="w-20 h-20 bg-gradient-to-br from-[#D4758C] to-[#B85C7A] rounded-full flex items-center justify-center mx-auto">
+          <FaCheckCircle className="w-10 h-10 text-white" />
+        </div>
+        
+        <div>
+          <h3 style={{ fontFamily: "'Playfair Display', serif" }} className="text-2xl text-[#2C3E50] font-semibold mb-3">
+            Всички места са запълнени! 🎉
+          </h3>
+          <p className="text-lg text-[#7A5662] leading-relaxed mb-4">
+            Поради изключително високия интерес, всичките <span className="font-bold text-[#D4758C]">{CAPACITY_REACHED} места</span> за уебинара са заети.
+          </p>
+        </div>
+
+        {/* Contact section */}
+        <div className="bg-gradient-to-br from-[#FFF5F7] to-[#FFE8ED] p-6 rounded-xl space-y-4 border-2 border-[#D4758C]/30">
+          <p className="text-base text-[#2C3E50] font-semibold">
+            Искате все пак да участвате?
+          </p>
+          
+          <p className="text-sm text-[#7A5662] leading-relaxed">
+            Свържете се директно с Милена Петрова на телефон:
+          </p>
+          
+          <a 
+            href="tel:+359899577300"
+            className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#D4758C] to-[#B85C7A] hover:from-[#B85C7A] hover:to-[#D4758C] text-white font-bold text-lg py-4 px-8 rounded-full transition-all duration-200 transform hover:-translate-y-1 hover:shadow-2xl shadow-lg"
+          >
+            <span className="text-2xl">📞</span>
+            <span>0899 577 300</span>
+          </a>
+          
+          <p className="text-xs text-[#8C7A6B] mt-3">
+            Милена ще провери възможностите за допълнително място
+          </p>
+        </div>
+
+        {/* Encouragement message */}
+        <div className="bg-[#F5F1EB] p-4 rounded-lg">
+          <p className="text-sm text-[#2C3E50] leading-relaxed">
+            Благодарим ви за интереса към уебинара! 💝<br/>
+            Следете за бъдещи събития и програми.
+          </p>
         </div>
       </div>
     );
