@@ -2,17 +2,23 @@ from fastapi import APIRouter, HTTPException, Depends, Header
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime, timedelta
+import hashlib
+import hmac
+import logging
 import os
 import secrets
-import hashlib
 
 from server import db
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
+logger = logging.getLogger(__name__)
 
 # Simple admin credentials (stored in .env)
 ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD_HASH = os.environ.get('ADMIN_PASSWORD_HASH', '')  # Will be bcrypt hash
+# Unsalted SHA-256 hex digest of the password; see README for how to generate it.
+# Stripped because a trailing newline pasted into .env would otherwise make every
+# login fail with no visible reason.
+ADMIN_PASSWORD_HASH = os.environ.get('ADMIN_PASSWORD_HASH', '').strip()
 
 # In-memory token storage (for MVP - use Redis in production)
 active_tokens = {}
@@ -61,18 +67,22 @@ async def admin_login(credentials: AdminLogin):
     if credentials.username != ADMIN_USERNAME:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
-    # For MVP, use simple password check
-    # In production, use bcrypt or proper password hashing
     password_hash = hash_password(credentials.password)
-    
-    # If no hash is set in env, allow default password "admin123" for demo
+
+    # Fail closed. An unset hash previously fell back to the well-known password
+    # "admin123", which left the bookings dashboard — and the client contact
+    # details in it — open to anyone who found the endpoint.
     if not ADMIN_PASSWORD_HASH:
-        if credentials.password != "admin123":
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-    else:
-        if password_hash != ADMIN_PASSWORD_HASH:
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-    
+        logger.error("Admin login attempted but ADMIN_PASSWORD_HASH is not set")
+        raise HTTPException(
+            status_code=503,
+            detail="Admin login is not configured on this server"
+        )
+
+    # Constant-time comparison so response timing cannot leak the hash.
+    if not hmac.compare_digest(password_hash, ADMIN_PASSWORD_HASH):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
     # Generate token
     token = secrets.token_urlsafe(32)
     expires_at = datetime.utcnow() + timedelta(hours=24)

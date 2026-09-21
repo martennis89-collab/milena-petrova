@@ -16,6 +16,11 @@ from datetime import datetime
 
 BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', '').rstrip('/')
 
+# Every test in this module talks to a running API over HTTP, so it is opt-in:
+#   pytest -m integration
+# The default run (see pytest.ini addopts) skips them.
+pytestmark = pytest.mark.integration
+
 # Test data prefix for cleanup
 TEST_PREFIX = "TEST_"
 
