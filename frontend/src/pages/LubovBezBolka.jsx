@@ -28,27 +28,6 @@ const LubovBezBolka = () => {
     // Setup scroll depth tracking
     const cleanupScroll = setupScrollTracking();
     
-    // Hide Emergent badge with JavaScript - simplified
-    const hideEmergentBadge = () => {
-      // Target specific badge by ID
-      const badge = document.querySelector('#emergent-badge');
-      if (badge) {
-        badge.style.display = 'none';
-      }
-      
-      // Target links with emergent in href
-      const emergentLinks = document.querySelectorAll('a[href*="emergent"]');
-      emergentLinks.forEach(link => {
-        if (link.textContent.toLowerCase().includes('made with')) {
-          link.style.display = 'none';
-        }
-      });
-    };
-    
-    // Run after component mounts
-    setTimeout(hideEmergentBadge, 500);
-    setTimeout(hideEmergentBadge, 2000);
-    
     // Meta Pixel initialization (only once)
     if (LUBOV_BEZ_BOLKA_CONFIG.META_PIXEL_ID && typeof window !== 'undefined' && !window.fbq) {
       // Initialize Facebook Pixel
@@ -99,23 +78,6 @@ const LubovBezBolka = () => {
         {/* Mobile optimization */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <meta name="theme-color" content="#2C3E50" />
-        
-        {/* Hide Emergent badge */}
-        <style>{`
-          /* Hide Emergent badge - valid CSS selectors only */
-          [class*="emergent"], 
-          [class*="Emergent"],
-          [id*="emergent"],
-          [id*="Emergent"],
-          a[href*="emergentagent"],
-          a[href*="emergent.com"],
-          #emergent-badge {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-          }
-        `}</style>
       </Helmet>
       
       {/* Minimal Header */}

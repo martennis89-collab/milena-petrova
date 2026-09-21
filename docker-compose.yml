@@ -1,0 +1,64 @@
+# Local/self-hosted stack for milenapetrova.bg.
+#
+#   cp backend/.env.example backend/.env    # then fill in real values
+#   docker compose up --build
+#
+#   frontend  http://localhost:3000
+#   backend   http://localhost:8001  (docs at /docs)
+#   mongo     localhost:27017
+#
+# This replaces the Emergent base image
+# (fastapi_react_mongo_shadcn_base_image_cloud_arm) that the project used to
+# run inside. Nothing here depends on Emergent.
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      # Exposed for direct inspection with mongosh / Compass. Drop this mapping
+      # in production so the database is reachable only on the private network.
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    env_file:
+      # Real secrets live here and are gitignored; see backend/.env.example.
+      - ./backend/.env
+    environment:
+      # Overrides whatever .env says, because inside the network the database is
+      # reached by service name rather than on localhost.
+      MONGO_URL: mongodb://mongo:27017
+      CORS_ORIGINS: http://localhost:3000
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Baked into the bundle at build time, so changing these needs a rebuild
+        # (`docker compose build frontend`), not just a restart.
+        REACT_APP_BACKEND_URL: http://localhost:8001
+        REACT_APP_SITE_URL: http://localhost:3000
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 import logging
 
-from emergentintegrations.payments.stripe.checkout import (
+from utils.stripe_checkout import (
     StripeCheckout,
     CheckoutSessionResponse,
     CheckoutStatusResponse,
@@ -19,8 +19,25 @@ from server import db
 router = APIRouter(prefix="/api/payments", tags=["payments"])
 logger = logging.getLogger(__name__)
 
-# Stripe API key from environment
-STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY', 'sk_test_emergent')
+# Stripe API key from environment. Deliberately no fallback value: a placeholder
+# key fails deep inside Stripe with an opaque error, so absence is reported here.
+STRIPE_API_KEY = os.environ.get('STRIPE_API_KEY')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET')
+
+
+def get_stripe_checkout(http_request: Request) -> StripeCheckout:
+    """Build a StripeCheckout for this request, or fail with a clear 503."""
+    if not STRIPE_API_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="Payments are not configured: STRIPE_API_KEY is missing"
+        )
+    host_url = str(http_request.base_url).rstrip('/')
+    return StripeCheckout(
+        api_key=STRIPE_API_KEY,
+        webhook_url=f"{host_url}/api/payments/webhook/stripe",
+        webhook_secret=STRIPE_WEBHOOK_SECRET,
+    )
 
 
 class CreateCheckoutRequest(BaseModel):
@@ -51,10 +68,8 @@ async def create_checkout_session(
         currency = package["currency"]
         
         # Initialize Stripe checkout
-        host_url = str(http_request.base_url).rstrip('/')
-        webhook_url = f"{host_url}/api/payments/webhook/stripe"
-        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
-        
+        stripe_checkout = get_stripe_checkout(http_request)
+
         # Create success and cancel URLs from frontend origin
         success_url = f"{request.origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}"
         cancel_url = f"{request.origin_url}/payment/cancel"
@@ -79,9 +94,10 @@ async def create_checkout_session(
             currency=currency,
             success_url=success_url,
             cancel_url=cancel_url,
-            metadata=metadata
+            metadata=metadata,
+            product_name=package["name"]
         )
-        
+
         # Create checkout session via Stripe
         session = await stripe_checkout.create_checkout_session(checkout_request)
         
@@ -124,10 +140,8 @@ async def get_checkout_status(
     """
     try:
         # Initialize Stripe checkout
-        host_url = str(http_request.base_url).rstrip('/')
-        webhook_url = f"{host_url}/api/payments/webhook/stripe"
-        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
-        
+        stripe_checkout = get_stripe_checkout(http_request)
+
         # Get checkout status from Stripe
         checkout_status = await stripe_checkout.get_checkout_status(session_id)
         
@@ -166,7 +180,9 @@ async def get_checkout_status(
         )
         
         return checkout_status
-        
+
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error getting checkout status: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to get checkout status: {str(e)}")
@@ -184,19 +200,17 @@ async def stripe_webhook(request: Request):
         
         if not signature:
             raise HTTPException(status_code=400, detail="Missing Stripe signature")
-        
+
         # Initialize Stripe checkout
-        host_url = str(request.base_url).rstrip('/')
-        webhook_url = f"{host_url}/api/payments/webhook/stripe"
-        stripe_checkout = StripeCheckout(api_key=STRIPE_API_KEY, webhook_url=webhook_url)
-        
-        # Handle webhook
+        stripe_checkout = get_stripe_checkout(request)
+
+        # Handle webhook (verifies the Stripe signature, raises if it does not match)
         webhook_response = await stripe_checkout.handle_webhook(body, signature)
-        
+
         logger.info(f"Webhook received: {webhook_response.event_type} for session {webhook_response.session_id}")
-        
+
         # Update database based on webhook event
-        if webhook_response.payment_status == "paid":
+        if webhook_response.payment_status == "paid" and webhook_response.session_id:
             await db.payment_transactions.update_one(
                 {"session_id": webhook_response.session_id, "payment_status": {"$ne": "paid"}},
                 {"$set": {
@@ -209,7 +223,9 @@ async def stripe_webhook(request: Request):
             logger.info(f"Payment confirmed via webhook for session {webhook_response.session_id}")
         
         return {"status": "success"}
-        
+
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Webhook error: {str(e)}")
         raise HTTPException(status_code=400, detail=str(e))

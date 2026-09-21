@@ -1,5 +1,13 @@
 # Email templates for booking confirmations and cancellations
 
+import os
+
+# Public origin used for links in customer-facing email. One href here pointed
+# at the Emergent preview subdomain while its link text read milenapetrova.bg,
+# so recipients were sent to a temporary host that dies with the Emergent job.
+SITE_URL = os.environ.get('SITE_URL', 'https://milenapetrova.bg').rstrip('/')
+
+
 def get_confirmation_email_html(name: str, event_type: str, start_time: str, price: str) -> str:
     """
     Generate confirmation email HTML for new bookings.
@@ -184,7 +192,7 @@ def get_cancellation_email_html(name: str, event_type: str, start_time: str) -> 
                                 
                                 <p style="margin: 0 0 20px; color: #4A4A4A; font-size: 16px; line-height: 1.6;">
                                     Ако искаш да запазиш друг час, можеш да направиш това на 
-                                    <a href="https://guided-sessions-2.preview.emergentagent.com/book" style="color: #8C7A6B; text-decoration: none;">milenapetrova.bg/book</a>
+                                    <a href="{SITE_URL}/book" style="color: #8C7A6B; text-decoration: none;">milenapetrova.bg/book</a>
                                 </p>
                                 
                                 <p style="margin: 0 0 20px; color: #4A4A4A; font-size: 16px; line-height: 1.6;">

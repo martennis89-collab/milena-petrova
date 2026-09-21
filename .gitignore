@@ -96,6 +96,9 @@ frontend/node_modules/.cache/default-development/12.pack
 .env
 .env.*
 *.env
+# ...but the committed templates carry placeholders only, never real values.
+!.env.example
+!**/.env.example
 credentials.json
 *.key
 .credentials
