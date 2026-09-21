@@ -21,9 +21,9 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
   // Refund policy
   REFUND_POLICY: 'Ако не намериш стойност в съдържанието, пълно възстановяване на парите без въпроси в рамките на 30 дни',
   
-  // Assets
-  WORKBOOK_PDF_URL: 'https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/1hbxuxty_%D0%94%D0%BD%D0%B5%D0%B2%D0%BD%D0%B8%D0%BA%20%D0%92%D1%80%D0%B5%D0%BC%D0%B5%20%D0%B7%D0%B0%20%D1%81%D0%B5%D0%B1%D0%B5%20%D1%81%D0%B8-1.pdf',
-  MILENA_PHOTO: 'https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg',
+  // Assets (self-hosted in frontend/public/assets)
+  WORKBOOK_PDF_URL: '/assets/dnevnik-vreme-za-sebe-si.pdf',
+  MILENA_PHOTO: '/assets/milena.jpg',
   
   // Analytics
   META_PIXEL_ID: '1326425393018449',
@@ -54,8 +54,8 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
     TITLE: 'Любов без болка - Онлайн програма за жени в болезнени връзки | Милена Петрова',
     DESCRIPTION: '14 видео урока + работна тетрадка + бонус частна сесия. Научи се да разпознаеш токсичните модели, да върнеш границите си и да избираш любов без болка. Специална цена 49€ за първите 20.',
     KEYWORDS: 'любов без болка, токсична връзка, емоционална зависимост, граници, здрави отношения, Милена Петрова',
-    OG_IMAGE: 'https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg',
-    OG_URL: 'https://guided-sessions-2.preview.emergentagent.com/lubov-bez-bolka',
+    OG_IMAGE: 'https://milenapetrova.bg/assets/milena.jpg',
+    OG_URL: 'https://milenapetrova.bg/lubov-bez-bolka',
   },
 };
 

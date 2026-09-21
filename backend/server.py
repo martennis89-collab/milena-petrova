@@ -69,10 +69,6 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
-# Import and include payment routes
-from routes.payments import router as payments_router
-app.include_router(payments_router)
-
 # Import and include calendar routes
 from routes.calendar import router as calendar_router
 app.include_router(calendar_router)

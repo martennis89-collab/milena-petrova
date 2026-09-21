@@ -12,7 +12,7 @@ const AboutHost = () => {
           <div className="relative">
             <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-[#E89AAC] rounded-3xl opacity-20 z-0" />
             <img
-              src="https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg"
+              src="/assets/milena.jpg"
               alt="Милена Петрова"
               className="relative z-10 rounded-3xl shadow-2xl w-full object-cover border-4 border-white"
             />
