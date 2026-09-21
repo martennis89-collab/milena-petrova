@@ -188,22 +188,85 @@ Integration tests are marked `integration` and excluded from the default run
 
 ---
 
-## Deployment notes
+## Deployment
 
-- **Frontend** builds to static files (`make build`) and can be served by any
-  static host or CDN. The included `frontend/nginx.conf` handles the SPA
-  fallback that React Router needs for deep links on hard refresh.
-- **Backend** runs as a single Uvicorn worker on purpose: admin session tokens
-  are held in process memory (`backend/routes/admin.py`), so multiple workers
-  would each keep a different set and log admins out at random. Move tokens to
-  Redis or switch to signed tokens before scaling horizontally.
-- **Stripe webhook** — register `https://<your-api-host>/api/payments/webhook/stripe`
-  in the Stripe dashboard and put the signing secret in `STRIPE_WEBHOOK_SECRET`.
-  Unverified webhooks are rejected, so an unset secret means payments never get
-  confirmed by webhook.
-- **CORS** — set `CORS_ORIGINS` to the real frontend origin.
-- **MongoDB** — do not expose port 27017 publicly; the mapping in
-  `docker-compose.yml` is a local convenience.
+The repository is configured for MongoDB Atlas + Render (API) + Vercel
+(frontend). `render.yaml` and `vercel.json` describe both services; no secret is
+stored in either file.
+
+Self-hosting works too — `docker compose up --build` runs the same stack, and
+`frontend/nginx.conf` provides the SPA fallback that React Router needs.
+
+### 0. Rescue the media first
+
+Two portraits and the workbook PDF are still served from Emergent's CDN. **Do
+this before the Emergent project is deleted**, or the files are gone:
+
+```bash
+./scripts/fetch-assets.sh          # downloads into frontend/public/assets/
+git add frontend/public/assets && git commit -m "Add brand assets"
+```
+
+Then set `REACT_APP_ASSET_BASE_URL=/assets`. Social meta tags stay absolute
+automatically (`SOCIAL_ASSETS` in `src/config/site.js`), because crawlers do not
+resolve relative image paths.
+
+### 1. MongoDB Atlas
+
+Create a cluster and a database user, allow network access from Render, and copy
+the `mongodb+srv://` connection string. `dnspython` is pinned precisely so that
+form of URI resolves.
+
+### 2. Render (API)
+
+Render → New → Blueprint → select this repository. It reads `render.yaml` and
+builds `backend/Dockerfile`. Then fill in the dashboard values that the
+blueprint deliberately leaves empty — `MONGO_URL`, the Stripe keys, Resend,
+Google and the admin hash.
+
+Two ordering details:
+
+- `CORS_ORIGINS` needs the Vercel domain, which does not exist until step 3.
+  Set it afterwards.
+- `GOOGLE_REDIRECT_URI` must match Google Cloud Console exactly:
+  `https://<service>.onrender.com/api/calendar/oauth/callback`.
+
+The service binds `$PORT`, which Render assigns. Avoid the free instance type:
+it sleeps, and a cold start stalls the first booking of the day.
+
+### 3. Vercel (frontend)
+
+Import the repository. `vercel.json` sets the build to `frontend/` and rewrites
+all unmatched paths to `index.html`, so deep links such as `/lubov-bez-bolka`
+survive a hard refresh.
+
+Set these in project settings — they are compiled into the bundle, so changing
+one needs a **rebuild**, not a restart:
+
+| Variable                  | Value                                  |
+| ------------------------- | -------------------------------------- |
+| `REACT_APP_BACKEND_URL`   | `https://<service>.onrender.com`       |
+| `REACT_APP_SITE_URL`      | `https://milenapetrova.bg`             |
+| `REACT_APP_ASSET_BASE_URL`| `/assets` (after step 0)               |
+
+### 4. Close the loop
+
+1. Set `CORS_ORIGINS` on Render to the Vercel origin — include the custom domain
+   as well as `*.vercel.app` if both are in use.
+2. Register the Stripe webhook at
+   `https://<service>.onrender.com/api/payments/webhook/stripe` and paste its
+   signing secret into `STRIPE_WEBHOOK_SECRET`. Until then, payments are never
+   confirmed by webhook, because unverified payloads are rejected by design.
+3. Verify a booking end to end with a Stripe test key before switching to live.
+
+### Known constraints
+
+- **One worker only.** Admin session tokens live in process memory
+  (`backend/routes/admin.py`), so a second worker or instance would hold a
+  different set and log admins out at random. Move them to Redis or switch to
+  signed tokens before scaling out.
+- **Do not expose MongoDB publicly.** The port mapping in `docker-compose.yml`
+  is a local convenience only.
 
 ---
 
@@ -226,11 +289,11 @@ made it impossible to build or run anywhere else, and both are gone:
 
 **Rehost the media.** The two portrait images and the workbook PDF are still
 served from `customer-assets.emergentagent.com` and will start returning 404 if
-that Emergent project is deleted. Nothing in this repository can prevent that.
-They are all resolved through one place —
-[`frontend/src/config/site.js`](frontend/src/config/site.js) — so once the files
-are rehosted (S3, Cloudflare R2, or just `frontend/public/`), set
-`REACT_APP_ASSET_BASE_URL` and nothing else needs to change.
+that Emergent project is deleted. Nothing in this repository can prevent that —
+run [`scripts/fetch-assets.sh`](scripts/fetch-assets.sh) while the Emergent job
+is still alive, then set `REACT_APP_ASSET_BASE_URL=/assets`. Everything resolves
+through [`frontend/src/config/site.js`](frontend/src/config/site.js), so no other
+file changes.
 
 **Check the session prices.** `frontend/src/pages/Payment.jsx` displays €51 and
 €138, while `backend/config/payment_config.py` charges €50 and €130. The backend

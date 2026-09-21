@@ -26,8 +26,21 @@ export const ASSET_BASE_URL = stripTrailingSlash(
   process.env.REACT_APP_ASSET_BASE_URL || DEFAULT_ASSET_BASE
 );
 
-/** Build an absolute URL for a media file. */
+/** Build a URL for a media file. Relative when ASSET_BASE_URL is relative. */
 export const asset = (path) => `${ASSET_BASE_URL}/${String(path).replace(/^\/+/, '')}`;
+
+/**
+ * Always-absolute URL for a media file.
+ *
+ * Open Graph and Twitter Card images must be absolute — crawlers do not resolve
+ * relative paths — so this is what social meta tags use. It matters as soon as
+ * the assets are rehosted inside the app and REACT_APP_ASSET_BASE_URL becomes
+ * something like "/assets".
+ */
+export const absoluteAsset = (path) => {
+  const url = asset(path);
+  return /^https?:\/\//i.test(url) ? url : `${SITE_URL}/${url.replace(/^\/+/, '')}`;
+};
 
 /** Build an absolute URL on this site, e.g. siteUrl('book'). */
 export const siteUrl = (path = '') => {
@@ -39,15 +52,24 @@ export const siteUrl = (path = '') => {
  * Named media assets. Filenames are the opaque keys Emergent's CDN assigned;
  * keep them as-is when rehosting, or update both sides together.
  */
+const PORTRAIT = 'z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg';
+const PORTRAIT_ALT = 'iqmzyaot_0d9fb4c0-41c8-4c7b-bc02-488dd6b229ca.JPG';
+const WORKBOOK =
+  '1hbxuxty_%D0%94%D0%BD%D0%B5%D0%B2%D0%BD%D0%B8%D0%BA%20%D0%92%D1%80%D0%B5%D0%BC%D0%B5%20%D0%B7%D0%B0%20%D1%81%D0%B5%D0%B1%D0%B5%20%D1%81%D0%B8-1.pdf';
+
+/** Media used in the page body. */
 export const ASSETS = {
   // Portrait of Milena used on the webinar and sales pages.
-  MILENA_PORTRAIT: asset('z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg'),
+  MILENA_PORTRAIT: asset(PORTRAIT),
   // Second portrait used in the testimonials/mock data.
-  MILENA_PORTRAIT_ALT: asset('iqmzyaot_0d9fb4c0-41c8-4c7b-bc02-488dd6b229ca.JPG'),
+  MILENA_PORTRAIT_ALT: asset(PORTRAIT_ALT),
   // "Дневник: Време за себе си" workbook handed out with the programme.
-  WORKBOOK_PDF: asset(
-    '1hbxuxty_%D0%94%D0%BD%D0%B5%D0%B2%D0%BD%D0%B8%D0%BA%20%D0%92%D1%80%D0%B5%D0%BC%D0%B5%20%D0%B7%D0%B0%20%D1%81%D0%B5%D0%B1%D0%B5%20%D1%81%D0%B8-1.pdf'
-  ),
+  WORKBOOK_PDF: asset(WORKBOOK),
 };
 
-export default { SITE_URL, ASSET_BASE_URL, ASSETS, asset, siteUrl };
+/** The same media, absolute, for social meta tags. */
+export const SOCIAL_ASSETS = {
+  MILENA_PORTRAIT: absoluteAsset(PORTRAIT),
+};
+
+export default { SITE_URL, ASSET_BASE_URL, ASSETS, SOCIAL_ASSETS, asset, absoluteAsset, siteUrl };

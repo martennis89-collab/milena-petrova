@@ -1,6 +1,6 @@
 // Configuration for "Любов без болка" sales page
 
-import { ASSETS, siteUrl } from './site';
+import { ASSETS, SOCIAL_ASSETS, siteUrl } from './site';
 
 export const LUBOV_BEZ_BOLKA_CONFIG = {
   // Checkout
@@ -56,7 +56,8 @@ export const LUBOV_BEZ_BOLKA_CONFIG = {
     TITLE: 'Любов без болка - Онлайн програма за жени в болезнени връзки | Милена Петрова',
     DESCRIPTION: '14 видео урока + работна тетрадка + бонус частна сесия. Научи се да разпознаеш токсичните модели, да върнеш границите си и да избираш любов без болка. Специална цена 49€ за първите 20.',
     KEYWORDS: 'любов без болка, токсична връзка, емоционална зависимост, граници, здрави отношения, Милена Петрова',
-    OG_IMAGE: ASSETS.MILENA_PORTRAIT,
+    // Absolute: social crawlers do not resolve relative image paths.
+    OG_IMAGE: SOCIAL_ASSETS.MILENA_PORTRAIT,
     // Previously pointed at the Emergent preview subdomain, which leaked a
     // non-canonical host into every share and search result.
     OG_URL: siteUrl('lubov-bez-bolka'),

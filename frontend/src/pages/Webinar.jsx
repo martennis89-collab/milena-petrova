@@ -7,7 +7,7 @@ import TransformationSection from '../components/webinar/TransformationSection';
 import AboutHost from '../components/webinar/AboutHost';
 import FinalCTA from '../components/webinar/FinalCTA';
 import RegistrationForm from '../components/webinar/RegistrationForm';
-import { ASSETS, siteUrl } from '../config/site';
+import { SOCIAL_ASSETS, siteUrl } from '../config/site';
 
 const Webinar = () => {
   return (
@@ -19,7 +19,7 @@ const Webinar = () => {
         {/* Open Graph */}
         <meta property="og:title" content="Безплатен Уебинар: Защо попадаме в отношения които ни нараняват" />
         <meta property="og:description" content="16 Юли 2026, 20:00ч. Научете невидимите модели, които ви връщат към едни и същи избори. Само 11 места остават!" />
-        <meta property="og:image" content={ASSETS.MILENA_PORTRAIT} />
+        <meta property="og:image" content={SOCIAL_ASSETS.MILENA_PORTRAIT} />
         <meta property="og:url" content={siteUrl('webinar')} />
       </Helmet>
       

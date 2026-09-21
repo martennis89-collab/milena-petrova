@@ -1,0 +1,77 @@
+# Render blueprint for the milenapetrova.bg API.
+#
+# Render → New → Blueprint → point it at this repository. Render reads this file
+# and creates the service; the values marked `sync: false` are NOT stored here
+# and must be entered in the Render dashboard, because they are secrets.
+#
+# The frontend is not defined here — it deploys to Vercel from vercel.json.
+# The database is MongoDB Atlas, which Render does not manage.
+
+services:
+  - type: web
+    name: milenapetrova-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    region: frankfurt          # closest region to a Bulgarian audience
+    plan: starter              # free instances sleep, which stalls the first booking of the day
+    healthCheckPath: /api/
+    autoDeploy: true
+
+    envVars:
+      # --- Required ----------------------------------------------------------
+      # Atlas connection string, mongodb+srv://... (dnspython resolves it).
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        value: milena_petrova
+
+      # Browser origins allowed to call this API. Must list the real frontend
+      # origin once the Vercel domain is known — including the custom domain if
+      # one is attached. Comma-separated, no spaces.
+      - key: CORS_ORIGINS
+        sync: false
+
+      # Public site origin, used for links inside customer-facing email.
+      - key: SITE_URL
+        value: https://milenapetrova.bg
+
+      # --- Admin dashboard ---------------------------------------------------
+      # Unsalted SHA-256 of the password; see the README. Login returns 503
+      # until this is set.
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+
+      # --- Stripe ------------------------------------------------------------
+      # Register the webhook at https://<this-service>.onrender.com/api/payments/webhook/stripe
+      # and paste its signing secret as STRIPE_WEBHOOK_SECRET. Payments are not
+      # confirmed by webhook while that is unset.
+      - key: STRIPE_API_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+
+      # --- Email -------------------------------------------------------------
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
+
+      # --- Google Calendar ---------------------------------------------------
+      # GOOGLE_REDIRECT_URI must match the Google Cloud Console entry exactly,
+      # i.e. https://<this-service>.onrender.com/api/calendar/oauth/callback
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+
+      # --- Meta Conversions API ----------------------------------------------
+      # Optional; server-side tracking no-ops without them.
+      - key: META_PIXEL_ID
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
