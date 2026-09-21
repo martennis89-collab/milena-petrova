@@ -27,7 +27,11 @@ USER appuser
 
 EXPOSE 8001
 
+# Shell form on purpose, so ${PORT} expands at runtime. Platforms such as Render
+# and Fly assign the port through that variable and expect the process to bind
+# to it; 8001 is the fallback for local Compose runs.
+#
 # Single worker: routes/admin.py keeps its session tokens in process memory, so
 # additional workers would each hold a different set and log admins out at
 # random. Fix that (Redis or a signed token) before scaling this up.
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001", "--workers", "1"]
+CMD uvicorn server:app --host 0.0.0.0 --port ${PORT:-8001} --workers 1
