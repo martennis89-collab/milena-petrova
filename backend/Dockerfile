@@ -1,4 +1,5 @@
-FROM python:3.11-slim
+# --- Stage: base — runtime dependencies and application code -----------------
+FROM python:3.11-slim AS base
 
 # Keep Python from buffering logs or writing .pyc files into the image layer.
 ENV PYTHONUNBUFFERED=1 \
@@ -7,18 +8,33 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
-# Build toolchain for the wheels that need compiling (cffi/cryptography on
-# architectures without a prebuilt wheel). Removed again in the same layer.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
 # Dependencies first, so edits to application code reuse this layer.
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt \
-    && apt-get purge -y --auto-remove build-essential
+
+# One RUN on purpose: build-essential is needed to compile wheels that have no
+# prebuilt binary for this architecture (cffi, cryptography), and purging it in
+# the same layer keeps it out of the image rather than merely hiding it.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get purge -y --auto-remove build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . .
+
+# --- Stage: test — adds pytest and the linters -------------------------------
+# Built on demand by the `backend-test` service in docker-compose.yml:
+#   docker compose run --rm backend-test
+# The default suite is unit tests only, so this needs no database.
+FROM base AS test
+
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+CMD ["python", "-m", "pytest"]
+
+# --- Stage: runtime — what actually ships ------------------------------------
+# Last stage, so a plain `docker build` produces this one.
+FROM base AS runtime
 
 # Drop privileges: nothing here needs root at runtime.
 RUN useradd --create-home --shell /usr/sbin/nologin appuser \

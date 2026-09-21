@@ -49,6 +49,44 @@ $EDITOR backend/.env      # fill in real values
 docker compose up --build
 ```
 
+<details>
+<summary><strong>Windows (PowerShell + Docker Desktop)</strong></summary>
+
+Windows has no `make`, so use Docker directly — it covers the whole flow:
+
+```powershell
+Copy-Item backend\.env.example  backend\.env
+Copy-Item frontend\.env.example frontend\.env
+notepad backend\.env                    # fill in real values
+
+docker compose up --build
+```
+
+Other commands, without `make`:
+
+| Task                | PowerShell                                                              |
+| ------------------- | ----------------------------------------------------------------------- |
+| Rescue CDN assets   | `.\scripts\fetch-assets.ps1`                                            |
+| Backend unit tests  | `docker compose run --rm backend-test`                                  |
+| Rebuild frontend    | `docker compose build frontend`                                         |
+| Tail logs           | `docker compose logs -f`                                                |
+| Stop                | `docker compose down`                                                   |
+
+Two Windows specifics worth knowing:
+
+- **Line endings are handled for you.** `.gitattributes` pins LF on shell
+  scripts, Dockerfiles, Makefile and `*.conf`. Without it, Git's default
+  `core.autocrlf=true` would rewrite them to CRLF on checkout and the Linux
+  containers would fail with `bad interpreter: ...^M`.
+- **Do not put this clone in a synced folder.** OneDrive, Dropbox and Google
+  Drive race with Git's internals and corrupt `.git`. Keep it on plain local
+  disk; GitHub is the sync mechanism.
+
+If you would rather use `make`, it comes with Git Bash + `choco install make`,
+or run everything inside WSL2.
+
+</details>
+
 | Service  | URL                          |
 | -------- | ---------------------------- |
 | Frontend | http://localhost:3000        |
@@ -206,6 +244,8 @@ this before the Emergent project is deleted**, or the files are gone:
 ./scripts/fetch-assets.sh          # downloads into frontend/public/assets/
 git add frontend/public/assets && git commit -m "Add brand assets"
 ```
+
+On Windows use `.\scripts\fetch-assets.ps1` — same job, no Git Bash needed.
 
 Then set `REACT_APP_ASSET_BASE_URL=/assets`. Social meta tags stay absolute
 automatically (`SOCIAL_ASSETS` in `src/config/site.js`), because crawlers do not

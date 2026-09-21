@@ -3,7 +3,7 @@
 
 .DEFAULT_GOAL := help
 .PHONY: help install install-backend install-frontend env \
-        dev-backend dev-frontend test test-backend test-integration \
+        dev-backend dev-frontend test test-backend test-integration test-docker \
         lint format build up down logs clean
 
 BACKEND  := backend
@@ -45,6 +45,9 @@ test-backend: ## Run backend unit tests
 
 test-integration: ## Run tests that need a live API (set REACT_APP_BACKEND_URL first)
 	cd $(BACKEND) && python -m pytest -m integration
+
+test-docker: ## Run backend unit tests inside the image the API is built from
+	docker compose run --rm backend-test
 
 # Frontend linting is not a separate step: react-scripts runs eslint during
 # `make build` and `make dev-frontend`, configured in frontend/craco.config.js.

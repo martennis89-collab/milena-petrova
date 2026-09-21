@@ -46,6 +46,17 @@ services:
       mongo:
         condition: service_healthy
 
+  # Unit tests in the same image the API is built from, so "works on my machine"
+  # stops being a variable. Not started by `docker compose up` — it sits behind a
+  # profile and is run explicitly:
+  #   docker compose run --rm backend-test
+  # Needs no database: the default suite excludes the integration tests.
+  backend-test:
+    build:
+      context: ./backend
+      target: test
+    profiles: ["test"]
+
   frontend:
     build:
       context: ./frontend
