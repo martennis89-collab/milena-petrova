@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
-  const getAuthHeaders = () => {
+  const getAuthHeaders = useCallback(() => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       navigate('/admin/login');
@@ -46,9 +46,9 @@ const AdminDashboard = () => {
         'Authorization': `Bearer ${token}`
       }
     };
-  };
+  }, [navigate]);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const headers = getAuthHeaders();
       if (!headers) return;
@@ -61,9 +61,9 @@ const AdminDashboard = () => {
       }
       console.error('Error fetching stats:', error);
     }
-  };
+  }, [getAuthHeaders, navigate]);
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     try {
       const headers = getAuthHeaders();
       if (!headers) return;
@@ -85,12 +85,12 @@ const AdminDashboard = () => {
       console.error('Error fetching bookings:', error);
       setLoading(false);
     }
-  };
+  }, [getAuthHeaders, navigate, search, statusFilter]);
 
   useEffect(() => {
     fetchStats();
     fetchBookings();
-  }, [statusFilter, search]);
+  }, [fetchBookings, fetchStats]);
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
