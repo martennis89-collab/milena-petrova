@@ -13,3 +13,8 @@ these exact names — the code already points at them.
 The portrait is used as a 1200×630 OG image, so keep it at least that size.
 
 Do this before the Vercel build (a missing file 404s but won't break the build).
+
+## Optional
+| Save as | What it is |
+|---|---|
+| `seminar-hero.jpg` | Background photo for the `/seminar` hero (optional — the page shows a warm taupe fallback if absent). |
