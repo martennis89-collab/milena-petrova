@@ -98,7 +98,7 @@ SENDER_EMAIL=onboarding@resend.dev
 
 ### Test Confirmation Email
 ```bash
-API_URL="https://guided-sessions-2.preview.emergentagent.com"
+API_URL="https://milenapetrova.bg"
 
 curl -X POST "$API_URL/api/calendly/webhook" \
   -H "Content-Type: application/json" \

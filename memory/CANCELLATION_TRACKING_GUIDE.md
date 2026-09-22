@@ -62,7 +62,7 @@
 2. Отиди на Webhooks settings
 3. Създай нов webhook с URL:
    ```
-   https://guided-sessions-2.preview.emergentagent.com/api/calendly/webhook
+   https://milenapetrova-api.onrender.com/api/calendly/webhook
    ```
 4. Избери следните events:
    - ✅ `invitee.created` - нова резервация
@@ -76,7 +76,7 @@
    - Попълни данните и завърши плащането
 
 2. **Провери в Dashboard:**
-   - Отиди на: https://guided-sessions-2.preview.emergentagent.com/admin
+   - Отиди на: https://milenapetrova.bg/admin
    - Login: `admin` / `admin123`
    - Виж новата резервация в таблицата
    - Stats ще покажат: Total +1, Confirmed +1

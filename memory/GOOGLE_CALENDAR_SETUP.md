@@ -86,11 +86,11 @@
 
 4. **Authorized JavaScript origins:**
    - Кликни "+ ADD URI"
-   - Добави: `https://guided-sessions-2.preview.emergentagent.com`
+   - Добави: `https://milenapetrova.bg`
 
 5. **Authorized redirect URIs:**
    - Кликни "+ ADD URI"
-   - Добави ТОЧНО това: `https://guided-sessions-2.preview.emergentagent.com/api/calendar/oauth/callback`
+   - Добави ТОЧНО това: `https://milenapetrova-api.onrender.com/api/calendar/oauth/callback`
    
    ⚠️ **ВАЖНО:** URL-ът трябва да е ТОЧНО този! Без trailing slash!
 
@@ -140,4 +140,4 @@ GOOGLE_CLIENT_SECRET=твоят_client_secret_тук
 
 - Screenshot-ни къде си затънала
 - Провери дали си избрала правилния проект (горе вляво)
-- Redirect URI трябва да е ТОЧНО: `https://guided-sessions-2.preview.emergentagent.com/api/calendar/oauth/callback`
+- Redirect URI трябва да е ТОЧНО: `https://milenapetrova-api.onrender.com/api/calendar/oauth/callback`

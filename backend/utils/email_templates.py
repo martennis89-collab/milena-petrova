@@ -184,7 +184,7 @@ def get_cancellation_email_html(name: str, event_type: str, start_time: str) -> 
                                 
                                 <p style="margin: 0 0 20px; color: #4A4A4A; font-size: 16px; line-height: 1.6;">
                                     Ако искаш да запазиш друг час, можеш да направиш това на 
-                                    <a href="https://guided-sessions-2.preview.emergentagent.com/book" style="color: #8C7A6B; text-decoration: none;">milenapetrova.bg/book</a>
+                                    <a href="https://milenapetrova.bg/book" style="color: #8C7A6B; text-decoration: none;">milenapetrova.bg/book</a>
                                 </p>
                                 
                                 <p style="margin: 0 0 20px; color: #4A4A4A; font-size: 16px; line-height: 1.6;">

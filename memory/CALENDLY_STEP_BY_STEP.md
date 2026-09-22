@@ -29,7 +29,7 @@
 2. Избери **"Redirect to an external site"**
 3. В полето **"Redirect URL"** въведи ТОЧНО това:
    ```
-   https://guided-sessions-2.preview.emergentagent.com/thank-you
+   https://milenapetrova.bg/thank-you
    ```
 
 4. **ВАЖНО:** Включи опцията **"Include event details in redirect URL"**
@@ -69,7 +69,7 @@
 ### Стъпка 3: Enter Webhook URL
 1. В полето **"Webhook URL"** или **"Callback URL"** въведи ТОЧНО:
    ```
-   https://guided-sessions-2.preview.emergentagent.com/api/calendly/webhook
+   https://milenapetrova-api.onrender.com/api/calendly/webhook
    ```
 
 2. **ВАЖНО:** URL-ът ТРЯБВА да е HTTPS (не HTTP)
@@ -117,7 +117,7 @@
 
 ❌ Ако има грешка, провери:
 - URL-ът е правилен (копирай-paste отново)
-- Backend-ът работи (провери: https://guided-sessions-2.preview.emergentagent.com/api/)
+- Backend-ът работи (провери: https://milenapetrova-api.onrender.com/api/)
 
 ---
 
@@ -126,14 +126,14 @@
 ### Test 1: Backend е достъпен
 Отвори в браузър:
 ```
-https://guided-sessions-2.preview.emergentagent.com/api/
+https://milenapetrova-api.onrender.com/api/
 ```
 Трябва да видиш: `{"message":"Hello World"}`
 
 ### Test 2: Webhook endpoint е достъпен
 Използвай curl или Postman:
 ```bash
-curl -X POST https://guided-sessions-2.preview.emergentagent.com/api/calendly/webhook \
+curl -X POST https://milenapetrova-api.onrender.com/api/calendly/webhook \
   -H "Content-Type: application/json" \
   -d '{"event":"invitee.created","payload":{"test":"data"}}'
 ```
@@ -142,7 +142,7 @@ curl -X POST https://guided-sessions-2.preview.emergentagent.com/api/calendly/we
 ### Test 3: View Bookings
 Отвори в браузър:
 ```
-https://guided-sessions-2.preview.emergentagent.com/api/calendly/bookings
+https://milenapetrova-api.onrender.com/api/calendly/bookings
 ```
 Ще видиш списък с bookings (празен в началото)
 
@@ -163,7 +163,7 @@ https://guided-sessions-2.preview.emergentagent.com/api/calendly/bookings
 │  │  Calendly прави 2 неща едновременно:            │        │
 │  │                                                  │        │
 │  │  A) REDIRECT (instant):                         │        │
-│  │     https://...emergentagent.com/thank-you      │        │
+│  │     https://milenapetrova.bg/thank-you        │        │
 │  │     ?invitee_email=...                          │        │
 │  │     &invitee_name=...                           │        │
 │  │     &event_start_time=...                       │        │

@@ -18,7 +18,7 @@ const Webinar = () => {
         {/* Open Graph */}
         <meta property="og:title" content="Безплатен Уебинар: Защо попадаме в отношения които ни нараняват" />
         <meta property="og:description" content="16 Юли 2026, 20:00ч. Научете невидимите модели, които ви връщат към едни и същи избори. Само 11 места остават!" />
-        <meta property="og:image" content="https://customer-assets.emergentagent.com/job_guided-sessions-2/artifacts/z6q4f8xp_00BBF565-6315-4EAC-864A-B5832736105D.jpeg" />
+        <meta property="og:image" content="https://milenapetrova.bg/assets/milena.jpg" />
         <meta property="og:url" content="https://milenapetrova.bg/webinar" />
       </Helmet>
       

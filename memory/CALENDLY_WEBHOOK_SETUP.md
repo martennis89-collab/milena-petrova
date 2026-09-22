@@ -20,7 +20,7 @@
 3. **Notifications & Redirects:**
    - Scroll до "Confirmations" section
    - Избери "Redirect to an external site"
-   - URL: `https://guided-sessions-2.preview.emergentagent.com/thank-you`
+   - URL: `https://milenapetrova.bg/thank-you`
    
 4. **Pass URL Parameters (важно!):**
    - Включи опцията "Include event details in URL"
@@ -46,7 +46,7 @@
 
 2. **Create Webhook:**
    - Click "Add Webhook"
-   - Webhook URL: `https://guided-sessions-2.preview.emergentagent.com/api/calendly/webhook`
+   - Webhook URL: `https://milenapetrova-api.onrender.com/api/calendly/webhook`
    
 3. **Subscribe to Events:**
    Избери следните events:
@@ -139,7 +139,7 @@ Bookings се записват в `bookings` collection:
 
 ### Test Thank You Page Locally:
 ```
-https://guided-sessions-2.preview.emergentagent.com/thank-you?invitee_email=test@example.com&invitee_name=Test%20User&event_start_time=2026-04-15T10:00:00Z
+https://milenapetrova.bg/thank-you?invitee_email=test@example.com&invitee_name=Test%20User&event_start_time=2026-04-15T10:00:00Z
 ```
 
 ### Check Backend Logs:
@@ -153,7 +153,7 @@ tail -f /var/log/supervisor/backend.out.log
 
 ### View Bookings in Database:
 ```
-GET https://guided-sessions-2.preview.emergentagent.com/api/calendly/bookings
+GET https://milenapetrova-api.onrender.com/api/calendly/bookings
 ```
 
 ---

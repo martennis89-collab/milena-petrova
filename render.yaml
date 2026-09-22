@@ -1,0 +1,43 @@
+# Render blueprint for the milenapetrova.bg backend (FastAPI).
+# Create the service from this file: Render Dashboard → New → Blueprint → pick this repo.
+# All secret values are set in the dashboard (sync: false), not in git.
+services:
+  - type: web
+    name: milenapetrova-api
+    runtime: python
+    rootDir: backend
+    # Starter (not Free): the app runs an in-process APScheduler for webinar
+    # reminders. Free instances sleep on inactivity, which stops the scheduler.
+    plan: starter
+    region: frankfurt          # closest to Bulgaria
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # --- set these in the Render dashboard (sync: false = not stored in git) ---
+      - key: MONGO_URL          # mongodb+srv://...  from MongoDB Atlas
+        sync: false
+      - key: DB_NAME            # e.g. milenapetrova
+        sync: false
+      - key: CORS_ORIGINS       # https://milenapetrova.bg,https://www.milenapetrova.bg
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SENDER_EMAIL       # e.g. kontakt@milenapetrova.bg (must be a verified Resend sender)
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI  # https://<this-service>.onrender.com/api/calendar/oauth/callback
+        sync: false
+      - key: META_PIXEL_ID
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD_HASH  # sha256 hash — see backend/.env.example
+        sync: false
